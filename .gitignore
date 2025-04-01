@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Random locks
+.~lock*
+
 # C extensions
 *.so
 
