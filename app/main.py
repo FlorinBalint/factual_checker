@@ -10,9 +10,18 @@ __all_politicians = [
     'Klaus Iohannis', 'Kelemen Hunor', 'Victor Ponta',
     'Marcel Ciolacu', 'Mircea Geoană', 'Elena Lasconi',
     'Nicușor Dan', 'Ilie Bolojan', 'Cătălin Drulă',
-    'Dan Barna', 'Dacian Cioloș',
-    'Anamaria Gavrilă','Cristian Terheș', 
-    'Nicolae Ciucă', 'Sebastian Burduja',
+    'Brigitte Clotilde Armand', 'Cristian Ghinea',
+    'Vlad Voiculescu',
+    'Traian Băsescu', 'Tudorel Toader', 'Viorica Dăncilă',
+    'Mihai Tudose', 'Rareș Bogdan', 'Tánczos Barna',
+    'Iulian Bulai', 'Liviu Dragnea', 'Ludovic Orban',
+    'Dominic Samuel Fritz', 'Dragoș Pîslaru', 'Ionuț Moșteanu',
+    'Florin Cîțu', 'Florin Iordache', 'Gabriela Firea',
+    'Ecaterina Andronescu', 'Emil Boc', 'Eugen Teodorovici',
+    'Călin Popescu Tăriceanu', 'Cristian Popescu Piedone',
+    'Dan Barna', 'Dacian Cioloș', 'Cătălin Predoiu',
+    'Anamaria Gavrilă','Cristian Terheș', 'Alexandru Rafila',
+    'Nicolae Ciucă', 'Sebastian Burduja', 'Claudiu Năsui',
     'George Simion', 'Diana Iovanovici-Șoșoacă']
 __all_politicians_str = ','.join(__all_politicians)
 

@@ -17,6 +17,7 @@ class PoliticianFactsCrawler:
         url_suffix = url_suffix.replace('â', 'a')
         url_suffix = url_suffix.replace('ț', 't')
         url_suffix = url_suffix.replace('î', 'i')
+        url_suffix = url_suffix.replace('á', 'a')
 
         return PoliticianFactsCrawler.__fact_url % url_suffix
 
