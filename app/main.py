@@ -1,6 +1,7 @@
 from politicians_crawler import PoliticiansCrawler
 from politician_fact_crawler import PoliticianFactsCrawler
 from stats_printer import CsvPrinter
+import multiprocessing as mp
 import argparse
 import logging
 
@@ -41,7 +42,16 @@ __parser.add_argument('-d', '--debug',
                     type=bool,
                     help='Change the log level to debug',
                     default=False)
+__parser.add_argument('-w', '--workers', type=int, 
+                    help='The number of processes to use for crawling',
+                    default=5)
 
+def crawl_politician(politician):
+    """
+    Crawl the politician's facts and return the statistics.
+    """
+    pFactsCrawler = PoliticianFactsCrawler(politician[0], politician[1])
+    return pFactsCrawler.parse_facts()
 
 if __name__ == "__main__":
     args = __parser.parse_args()
@@ -64,11 +74,18 @@ if __name__ == "__main__":
       politicians = PoliticiansCrawler(skip_politicians).find_politicians()
 
     stats = []
-    for politician in politicians:
-         pol_stats = PoliticianFactsCrawler(politician[0], politician[1]).parse_facts()
-         if pol_stats is not None and pol_stats.total > 0:             
-             stats.append(pol_stats)
+    with mp.Pool(args.workers) as pool:
+      async_stats = pool.imap_unordered(crawl_politician, politicians, chunksize=10)
+      # Wait for all processes to finish      
+      for stat in async_stats:
+        if stat is not None and stat.total > 0:
+          stats.append(stat)
+      
+      pool.close()
+      pool.join()
 
+    # Print the results
+    logging.debug('Found non empty stats for %d politicians' % len(stats))
     CsvPrinter(output_file).print_politicians(stats)
 
     

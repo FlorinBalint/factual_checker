@@ -35,7 +35,7 @@ class PoliticianFactsCrawler:
       logging.debug('Querying URL: ' + self.link)
       response = requests.get(self.link, headers=PoliticianFactsCrawler.__browser_headers)
       doc = pq(response.text)
-      statements = doc('span.statement-value-text').items()
+      statements = list(doc('span.statement-value-text').items())
 
       truth_st = 0
       false_st = 0
@@ -56,5 +56,6 @@ class PoliticianFactsCrawler:
           impossible_to_check_st += 1
         else:
           logging.warning(f'Unknown statement value {statement.text()} for politician {self.name}')
-      
-      return PoliticianStats(self.name, impossible_to_check_st, false_st, truncated_st, partially_true_st, truth_st)
+      res = PoliticianStats(self.name, "", impossible_to_check_st, false_st, truncated_st, partially_true_st, truth_st)
+      logging.debug('Found stats for politician %s with %d: %s' % (self.name, len(statements), str(res)))
+      return res

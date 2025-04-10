@@ -5,8 +5,9 @@ class PoliticianStats:
     __partially_true_weight = 75
     __true_weight = 100
 
-    def __init__(self, name, impossible_to_check_count, false_count, truncated_count, partially_true_count, true_count):
+    def __init__(self, name, affiliation, impossible_to_check_count, false_count, truncated_count, partially_true_count, true_count):
         self.name = name
+        self.affiliation = affiliation
         self.false_count = false_count
         self.truncated_count = truncated_count
         self.partially_true_count = partially_true_count
@@ -26,7 +27,9 @@ class PoliticianStats:
         return (self.credibility, self.total, self.impossible_to_check_count, self.false_count, self.truncated_count, self.partially_true_count, self.true_count)
 
     def __str__(self):
-        return "Nume: %s, Credibilitate: %.2f %, Număr declarații: %s, Imposibil de verificat %s, False: %s, Trunchiate: %s, Parțial adevărate: %s, Adevărate: %s" % (self.name, 
+        return "Nume: %s, Afiliere %s, Credibilitate: %.2f, Număr declarații: %s, Imposibil de verificat %s, False: %s, Trunchiate: %s, Parțial adevărate: %s, Adevărate: %s" % (
+                                                                                                                                            self.name,
+                                                                                                                                            self.affiliation,
                                                                                                                                             self.credibility,
                                                                                                                                             self.total,
                                                                                                                                             self.impossible_to_check_count,

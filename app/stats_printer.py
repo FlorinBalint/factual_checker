@@ -12,11 +12,12 @@ class CsvPrinter:
         writer.writerow(CsvPrinter.__file_header)
         politician_stats.sort(
             key=lambda x: (x.credibility, x.total), reverse=True
-        )        
+        )   
         for politician_stat in politician_stats:
           new_row = (politician_stat.name, 
+                     politician_stat.affiliation if politician_stat.affiliation else '',
                      f'{round(politician_stat.credibility, 2)}%',
-                     politician_stat.total, 
+                     politician_stat.total,
                      politician_stat.impossible_to_check_count,
                      politician_stat.false_count,
                      politician_stat.truncated_count,
