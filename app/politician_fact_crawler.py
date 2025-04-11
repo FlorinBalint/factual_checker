@@ -2,7 +2,7 @@ import requests
 import logging
 from pyquery import PyQuery as pq
 from politician_stats import PoliticianStats 
-
+from party_extractor import PartyExtractor
 
 class PoliticianFactsCrawler:
     __browser_headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
@@ -13,8 +13,9 @@ class PoliticianFactsCrawler:
     __truncated_statement_values = {'Trunchiat', 'Parțial Fals'}
     __impossible_to_check_values = {'Imposibil de verificat'}
 
-    def __init__(self, name, link=None):
+    def __init__(self, name, link=None, party=None):
         self.name = name
+        self.party = party
         if link is not None:
             self.link = self.__get_legacy_url()
         else:
@@ -56,6 +57,8 @@ class PoliticianFactsCrawler:
           impossible_to_check_st += 1
         else:
           logging.warning(f'Unknown statement value {statement.text()} for politician {self.name}')
-      res = PoliticianStats(self.name, "", impossible_to_check_st, false_st, truncated_st, partially_true_st, truth_st)
+
+      party = PartyExtractor(self.party).extract_party(doc)
+      res = PoliticianStats(self.name, party, impossible_to_check_st, false_st, truncated_st, partially_true_st, truth_st)
       logging.debug('Found stats for politician %s with %d: %s' % (self.name, len(statements), str(res)))
       return res

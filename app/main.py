@@ -23,6 +23,43 @@ __renown_politicians = [
     'Nicolae Ciucă', 'Sebastian Burduja', 'Claudiu Năsui',
     'George Simion', 'Diana Iovanovici-Șoșoacă']
 
+__party_override = {
+  'Klaus Iohannis': 'PNL',
+  'Nicușor Dan': 'USR',
+  'Elena Udrea': 'PMP',
+  'Marcel Ciolacu': 'PSD',
+  'Toni Greblă': 'AEP',
+  'Dacian Cioloș': 'REPER',
+  'Mihai Lascau': 'AUR',
+  'Partidul Social Democrat': 'PSD',
+  'PNL': 'PNL',
+  'AUR': 'AUR',
+  'AUR (Alianța pentru Unirea Românilor)': 'AUR',
+  'Primăria Municipiul București': 'Primăria București',
+  'Guvernul României': 'Guvern',
+  'Ministerul Finanțelor': 'Guvern',
+  'Liviu Iolu': 'Guvern',
+  'Brigitte Clotilde Armand': 'USR',
+  'Ciprian Ciucu': 'PNL',
+  'Cristina Palmer': 'Independent',
+  'Marcel Vela': 'PNL',
+  'Radu Mihail': 'USR',
+  'Victor Costache' : 'PNL',
+  'Costel Alexe': 'PNL',
+  'Alina Gorghiu': 'PNL',
+  'Ilan Laufer': 'AUR',
+  'Tudorel Toader': 'Independent',
+  'Patriciu Achimaș-Cadariu': '',
+  'Raluca Prună': 'Independent',
+  'Sorina Pintea': 'PSD',
+  'Violeta Alexandru': 'USR',
+  'Alexandru Athanasiu': 'PSD',
+  'Corina Șuteu': 'Independent',
+  'Stelian Ion': 'USR',
+  'Patriciu Achimaș-Cadariu': 'PSD',
+  'Mihai Lasca': 'AUR',
+}
+
 __parser = argparse.ArgumentParser(
     prog='Factual Checker',
     description='Check the factual statements of a politician')
@@ -50,7 +87,7 @@ def crawl_politician(politician):
     """
     Crawl the politician's facts and return the statistics.
     """
-    pFactsCrawler = PoliticianFactsCrawler(politician[0], politician[1])
+    pFactsCrawler = PoliticianFactsCrawler(politician[0], politician[1], __party_override.get(politician[0]))
     return pFactsCrawler.parse_facts()
 
 if __name__ == "__main__":
