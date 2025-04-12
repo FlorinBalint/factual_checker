@@ -1,5 +1,6 @@
 from politicians_crawler import PoliticiansCrawler
 from politician_fact_crawler import PoliticianFactsCrawler
+from party_stats import PartyStats
 from stats_reader import CsvReader
 from stats_printer import CsvPrinter
 import multiprocessing as mp
@@ -141,6 +142,17 @@ if __name__ == "__main__":
 
     # Print the results
     logging.debug('Found non empty stats for %d politicians' % len(stats))
+
+    # Print the politicians stats
     CsvPrinter(output_file).print_politicians(stats)
 
-    
+    # Print the party stats
+    party_stats_list = []
+    party_stats_dict = {}
+    for stat in stats:
+      if stat.affiliation.upper() not in party_stats_dict:
+        party_stats_dict[stat.affiliation.upper()] = []
+      party_stats_dict[stat.affiliation.upper()].append(stat)
+    for party, party_stats in party_stats_dict.items():
+      party_stats_list.append(PartyStats(party, party_stats))
+    CsvPrinter(f'party_{output_file}').print_party_stats(party_stats_list)
