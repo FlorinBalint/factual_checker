@@ -1,5 +1,6 @@
 from politicians_crawler import PoliticiansCrawler
 from politician_fact_crawler import PoliticianFactsCrawler
+from stats_reader import CsvReader
 from stats_printer import CsvPrinter
 import multiprocessing as mp
 import argparse
@@ -83,12 +84,44 @@ __parser.add_argument('-w', '--workers', type=int,
                     help='The number of processes to use for crawling',
                     default=5)
 
+__parser.add_argument('--stats_file', type=str,
+                    help='An input file with the politician stats.' \
+                    'If set, this file will be used to read the stats instead of crawling them.',
+                    default=None)
+
+
 def crawl_politician(politician):
     """
     Crawl the politician's facts and return the statistics.
     """
     pFactsCrawler = PoliticianFactsCrawler(politician[0], politician[1], __party_override.get(politician[0]))
     return pFactsCrawler.parse_facts()
+
+
+def crawl_stats(args):
+  skip_politicians = set(args.skip_list.split(',')) if args.skip_list else {}
+    
+  if args.politicians:
+    politicians = args.politicians.split(',')
+    if len(politicians) == 0:
+      politicians = __renown_politicians
+    politicians = [(p.strip(), None) for p in politicians if p not in skip_politicians]
+  else:
+    politicians = PoliticiansCrawler(skip_politicians).find_politicians()
+
+  stats = []
+  with mp.Pool(args.workers) as pool:
+    async_stats = pool.imap_unordered(crawl_politician, politicians, chunksize=10)
+    # Wait for all processes to finish      
+    for stat in async_stats:
+      if stat is not None and stat.total > 0:
+        stats.append(stat)
+    
+    pool.close()
+    pool.join()
+
+  return stats
+
 
 if __name__ == "__main__":
     args = __parser.parse_args()
@@ -100,26 +133,11 @@ if __name__ == "__main__":
       logging.basicConfig(level=logging.INFO)
 
     output_file = args.output if args.output else 'politician_stats.csv'
-    skip_politicians = set(args.skip_list.split(',')) if args.skip_list else {}
-    
-    if args.politicians:
-      politicians = args.politicians.split(',')
-      if len(politicians) == 0:
-        politicians = __renown_politicians
-      politicians = [(p.strip(), None) for p in politicians if p not in skip_politicians]
-    else:
-      politicians = PoliticiansCrawler(skip_politicians).find_politicians()
-
-    stats = []
-    with mp.Pool(args.workers) as pool:
-      async_stats = pool.imap_unordered(crawl_politician, politicians, chunksize=10)
-      # Wait for all processes to finish      
-      for stat in async_stats:
-        if stat is not None and stat.total > 0:
-          stats.append(stat)
-      
-      pool.close()
-      pool.join()
+    if args.stats_file:
+      logging.debug('Reading stats from file %s' % args.stats_file)
+      stats = CsvReader(args.stats_file).read_politician_stats()
+    else: 
+      stats = crawl_stats(args)
 
     # Print the results
     logging.debug('Found non empty stats for %d politicians' % len(stats))

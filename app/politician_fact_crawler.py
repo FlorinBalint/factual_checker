@@ -4,6 +4,8 @@ from pyquery import PyQuery as pq
 from politician_stats import PoliticianStats 
 from party_extractor import PartyExtractor
 
+logger = logging.getLogger(__name__)
+
 class PoliticianFactsCrawler:
     __browser_headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
     __fact_url = "https://www.factual.ro/persoane/%s/"
@@ -33,7 +35,7 @@ class PoliticianFactsCrawler:
         return PoliticianFactsCrawler.__fact_url % url_suffix
 
     def parse_facts(self):
-      logging.debug('Querying URL: ' + self.link)
+      logger.debug('Querying URL: ' + self.link)
       response = requests.get(self.link, headers=PoliticianFactsCrawler.__browser_headers)
       doc = pq(response.text)
       statements = list(doc('span.statement-value-text').items())
@@ -56,9 +58,9 @@ class PoliticianFactsCrawler:
         elif statement.text() in PoliticianFactsCrawler.__impossible_to_check_values:
           impossible_to_check_st += 1
         else:
-          logging.warning(f'Unknown statement value {statement.text()} for politician {self.name}')
+          logger.warning(f'Unknown statement value {statement.text()} for politician {self.name}')
 
       party = PartyExtractor(self.party).extract_party(doc)
       res = PoliticianStats(self.name, party, impossible_to_check_st, false_st, truncated_st, partially_true_st, truth_st)
-      logging.debug('Found stats for politician %s with %d: %s' % (self.name, len(statements), str(res)))
+      logger.debug('Found stats for politician %s with %d: %s' % (self.name, len(statements), str(res)))
       return res

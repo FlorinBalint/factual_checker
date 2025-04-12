@@ -2,9 +2,11 @@ import re
 import logging
 from pyquery import PyQuery
 
+logger = logging.getLogger(__name__)
+
 class PartyExtractor:
   __pattern = re.compile(r'(Afiliere Politică: )'
-    r'([Ff]ost )?(membru|[Pp]artidul|[Dd]eputat|[Ss]enator|[Ee]uroparlamentar|(Vice)?[pP]reședinte)?'
+    r'([Ff]ost )?(membru|[p]artidul|[Dd]eputat|[Ss]enator|[Ee]uroparlamentar|(Vice)?[pP]reședinte)?'
     r'(?P<party>(?:[^,\(]*)+)'
   )
 
@@ -28,12 +30,12 @@ class PartyExtractor:
     
     description = page_doc('.afilierepolitica')
     if not description:
-      logging.warning('No description found on page')
+      logger.warning('No description found on page')
       return "Independent"
         
     items = list(description.items())
     if not items or len(items) == 0:
-      logging.warning('No items found in description')
+      logger.warning('No items found in description')
       return "Independent"
 
     affiliate_text = items[0].text()

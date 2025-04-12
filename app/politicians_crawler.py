@@ -2,6 +2,8 @@ import requests
 import logging
 from pyquery import PyQuery as pq
 
+logger = logging.getLogger(__name__)
+
 class PoliticiansCrawler:
     __browser_headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
     __root_url = "https://www.factual.ro/politicieni//"
@@ -10,7 +12,7 @@ class PoliticiansCrawler:
         self.skip_politicians = skip_politicians
 
     def find_politicians(self):
-        logging.debug('Querying for politicians at ' + PoliticiansCrawler.__root_url)
+        logger.debug('Querying for politicians at ' + PoliticiansCrawler.__root_url)
         # Get the page with the politicians
         response = requests.get(PoliticiansCrawler.__root_url, headers=PoliticiansCrawler.__browser_headers)
         doc = pq(response.text)
@@ -24,10 +26,10 @@ class PoliticiansCrawler:
             name = name.split('\n')[0].strip()
             
             link = politician.attr('href')
-            logging.debug('Found politician: ' + name + ' at link: ' + link)
+            logger.debug('Found politician: ' + name + ' at link: ' + link)
             if name in self.skip_politicians:
                 continue
             
             politicians.append((name, link))
-        logging.debug('Crawled %d politicians' % len(politicians))
+        logger.debug('Crawled %d politicians' % len(politicians))
         return politicians
