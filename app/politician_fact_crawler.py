@@ -18,7 +18,7 @@ class PoliticianFactsCrawler:
     def __init__(self, name, link=None, party=None):
         self.name = name
         self.party = party
-        if link is not None:
+        if link is None:
             self.link = self.__get_legacy_url()
         else:
             self.link = link
