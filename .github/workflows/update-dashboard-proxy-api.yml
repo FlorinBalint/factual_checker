@@ -1,0 +1,170 @@
+name: Update Dashboard Data (Proxy API)
+
+on:
+  schedule:
+    # Run daily at 6:00 AM UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install fake-useragent
+        
+    - name: Create proxy-enabled crawler
+      run: |
+        cat > app/proxy_crawler.py << 'EOF'
+        import requests
+        import random
+        import time
+        from fake_useragent import UserAgent
+        
+        class ProxyCrawler:
+            def __init__(self):
+                self.ua = UserAgent()
+                # Free proxy APIs (no auth required)
+                self.proxy_apis = [
+                    'https://api.proxyscrape.com/v2/?request=get&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all',
+                    'https://www.proxy-list.download/api/v1/get?type=http',
+                    'https://api.openproxylist.xyz/http.txt'
+                ]
+                self.working_proxies = []
+                
+            def get_proxies(self):
+                proxies = []
+                for api in self.proxy_apis:
+                    try:
+                        response = requests.get(api, timeout=10)
+                        if response.status_code == 200:
+                            proxy_list = response.text.strip().split('\n')
+                            proxies.extend([p.strip() for p in proxy_list if p.strip()])
+                    except:
+                        continue
+                return proxies[:20]  # Limit to first 20
+                
+            def test_proxy(self, proxy):
+                try:
+                    test_url = 'http://httpbin.org/ip'
+                    proxies = {'http': f'http://{proxy}', 'https': f'http://{proxy}'}
+                    response = requests.get(test_url, proxies=proxies, timeout=5)
+                    return response.status_code == 200
+                except:
+                    return False
+                    
+            def get_working_proxies(self):
+                if self.working_proxies:
+                    return self.working_proxies
+                    
+                proxies = self.get_proxies()
+                for proxy in proxies[:10]:  # Test first 10
+                    if self.test_proxy(proxy):
+                        self.working_proxies.append(proxy)
+                        if len(self.working_proxies) >= 3:  # Get 3 working proxies
+                            break
+                return self.working_proxies
+                
+            def make_request(self, url, max_retries=3):
+                headers = {'User-Agent': self.ua.random}
+                
+                # Try direct request first
+                try:
+                    response = requests.get(url, headers=headers, timeout=30)
+                    if response.status_code == 200:
+                        return response
+                except:
+                    pass
+                
+                # Try with proxies
+                working_proxies = self.get_working_proxies()
+                for proxy in working_proxies:
+                    try:
+                        proxies = {'http': f'http://{proxy}', 'https': f'http://{proxy}'}
+                        response = requests.get(url, headers=headers, proxies=proxies, timeout=30)
+                        if response.status_code == 200:
+                            return response
+                        time.sleep(random.uniform(1, 3))
+                    except:
+                        continue
+                        
+                raise Exception(f"Failed to fetch {url} after all retries")
+        EOF
+        
+    - name: Update crawlers to use proxy
+      run: |
+        # Create a wrapper script that uses proxy crawling
+        cat > app/proxy_main.py << 'EOF'
+        from proxy_crawler import ProxyCrawler
+        from politician_fact_crawler import PoliticianFactsCrawler
+        from politicians_crawler import PoliticiansCrawler
+        import main
+        import requests
+        
+        # Monkey patch requests in the crawlers
+        proxy_crawler = ProxyCrawler()
+        
+        # Replace the original requests.get with proxy-enabled version
+        original_get = requests.get
+        def proxy_get(url, **kwargs):
+            try:
+                return proxy_crawler.make_request(url)
+            except:
+                # Fallback to original
+                return original_get(url, **kwargs)
+        
+        requests.get = proxy_get
+        
+        # Now run the main script
+        if __name__ == "__main__":
+            main.main(main.__parser.parse_args())
+        EOF
+        
+    - name: Generate CSV data with proxy
+      run: |
+        cd app
+        python proxy_main.py --output ../dashboard/politician_stats.csv --generate_party_stats false --workers 1
+      env:
+        PYTHONUNBUFFERED: 1
+        
+    - name: Fallback to predefined politicians if needed
+      run: |
+        cd app
+        if [ ! -f ../dashboard/politician_stats.csv ] || [ ! -s ../dashboard/politician_stats.csv ]; then
+          echo "Proxy crawling failed, using predefined politician list..."
+          python proxy_main.py --politicians "Klaus Iohannis,Marcel Ciolacu,Elena Lasconi,George Simion,Diana Iovanovici-Șoșoacă,Nicolae Ciucă,Kelemen Hunor" --output ../dashboard/politician_stats.csv --generate_party_stats false --workers 1
+        fi
+        
+    - name: Check if CSV was generated
+      run: |
+        if [ ! -f dashboard/politician_stats.csv ]; then
+          echo "Error: CSV file was not generated"
+          exit 1
+        fi
+        echo "CSV file generated successfully"
+        wc -l dashboard/politician_stats.csv
+        
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add dashboard/politician_stats.csv
+        
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Auto-update politician stats data - $(date '+%Y-%m-%d %H:%M UTC')"
+          git push
+        fi

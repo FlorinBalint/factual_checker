@@ -23,15 +23,16 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install requests[socks] pysocks
+        pip install requests[socks] pysocks fake-useragent
         
-    - name: Setup Tor proxy (as fallback)
+    - name: Setup multiple proxy options
       run: |
+        # Install and start Tor
         sudo apt-get update
-        sudo apt-get install -y tor
+        sudo apt-get install -y tor privoxy
         sudo systemctl start tor
-        # Wait for Tor to start
-        sleep 10
+        sudo systemctl start privoxy
+        sleep 15
         
     - name: Generate CSV data with proxy fallback
       run: |
