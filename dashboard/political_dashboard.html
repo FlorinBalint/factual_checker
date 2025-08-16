@@ -4,7 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Credibilitate Politicieni</title>
+  <title>Dashboard Credibilitate Politicieni România</title>
+  <meta name="description" content="Dashboard interactiv cu statistici de credibilitate ale politicienilor români bazate pe verificarea factelor">
+  <meta name="keywords" content="politicieni, credibilitate, fact-checking, România, statistici">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <link rel="stylesheet" href="dashboard_style.css">
@@ -14,29 +16,9 @@
   <div class="container">
     <h1><span class="emoji">📊</span> <span class="gradient-text">Dashboard Credibilitate Politicieni</span></h1>
 
-    <div class="upload-zone" id="uploadZone">
-      <div class="upload-text">📁 Încarcă fișierul CSV sau introdu URL-ul</div>
-      <div style="color: #7f8c8d; margin-bottom: 15px;">Trage și lasă fișierul aici sau fă click pentru a
-        selecta</div>
-      <input type="file" id="csvFile" accept=".csv" />
-
-      <div style="margin-top: 20px;">
-        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
-          <input type="url" id="csvUrl" placeholder="https://example.com/data.csv"
-            style="flex: 1; padding: 10px; border: 2px solid #3498db; border-radius: 8px; font-size: 14px;">
-          <button id="loadFromUrl"
-            style="padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">
-            Încarcă din URL
-          </button>
-        </div>
-        <div style="font-size: 0.85em; color: #7f8c8d; line-height: 1.4;">
-          💡 <strong>Sfaturi pentru URL:</strong><br>
-          • GitHub Raw: https://raw.githubusercontent.com/user/repo/main/file.csv<br>
-          • Google Sheets: File → Publish → CSV format<br>
-          • Dropbox: Înlocuiește "dl=0" cu "dl=1" în link<br>
-          • Pentru alte servicii, asigură-te că link-ul este direct către CSV
-        </div>
-      </div>
+    <div class="status-zone" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+      <div style="font-size: 1.2em; margin-bottom: 10px;">📊 Date actualizate automat</div>
+      <div style="font-size: 0.9em; opacity: 0.9;">Datele sunt actualizate zilnic și afișate automat</div>
     </div>
 
     <div class="loading" id="loading">

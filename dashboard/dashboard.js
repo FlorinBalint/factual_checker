@@ -11,65 +11,13 @@ let isUpdatingFilters = false;
 
 // Styling is now handled in dashboard_style.css
 
-// Upload zone interactions
-const uploadZone = document.getElementById('uploadZone');
-const csvFile = document.getElementById('csvFile');
-const csvUrl = document.getElementById('csvUrl');
-const loadFromUrlBtn = document.getElementById('loadFromUrl');
+// Auto-load functionality only
 
-uploadZone.addEventListener('click', () => csvFile.click());
-uploadZone.addEventListener('dragover', (e) => {
-  e.preventDefault();
-  uploadZone.classList.add('dragover');
-});
-uploadZone.addEventListener('dragleave', () => {
-  uploadZone.classList.remove('dragover');
-});
-uploadZone.addEventListener('drop', (e) => {
-  e.preventDefault();
-  uploadZone.classList.remove('dragover');
-  const files = e.dataTransfer.files;
-  if (files.length > 0) {
-    handleFile(files[0]);
-  }
-});
-
-csvFile.addEventListener('change', (e) => {
-  if (e.target.files.length > 0) {
-    handleFile(e.target.files[0]);
-    // Reset the file input so the same file can be uploaded again
-    e.target.value = '';
-  }
-});
-
-loadFromUrlBtn.addEventListener('click', () => {
-  const url = csvUrl.value.trim();
-  if (!url) {
-    alert('Te rog introdu un URL valid!');
-    return;
-  }
-
-  // Validate URL format
-  try {
-    new URL(url);
-  } catch {
-    alert('URL-ul nu este valid! Asigură-te că începe cu http:// sau https://');
-    return;
-  }
-
-  loadFromUrl(url);
-});
-
-// Also allow Enter key on URL input
-csvUrl.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    loadFromUrlBtn.click();
-  }
-});
-
-// Auto-load local CSV file if it exists
+// Auto-load local CSV file on page load
 window.addEventListener('DOMContentLoaded', () => {
-  // Try to load local CSV file first
+  document.getElementById('loading').style.display = 'block';
+  
+  // Load local CSV file
   fetch('./politician_stats.csv')
     .then(response => {
       if (response.ok) {
@@ -81,8 +29,18 @@ window.addEventListener('DOMContentLoaded', () => {
       parseCSVText(csvText, false);
     })
     .catch(error => {
-      console.log('Local CSV not found, user will need to upload or provide URL');
-      // Dashboard remains in upload mode
+      console.error('Failed to load politician stats:', error);
+      document.getElementById('loading').style.display = 'none';
+      
+      // Show error message instead of upload zone
+      const statusZone = document.querySelector('.status-zone');
+      if (statusZone) {
+        statusZone.innerHTML = `
+          <div style="font-size: 1.2em; margin-bottom: 10px;">❌ Eroare la încărcarea datelor</div>
+          <div style="font-size: 0.9em; opacity: 0.9;">Nu s-au putut încărca datele politicienilor. Vă rugăm să reîncercați mai târziu.</div>
+        `;
+        statusZone.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+      }
     });
 });
 
@@ -105,78 +63,7 @@ document.getElementById('topPoliticiansPerPage').addEventListener('change', (e) 
   generateTopPoliticiansChart();
 });
 
-async function loadFromUrl(url) {
-  try {
-    destroyAllCharts();
-    document.getElementById('loading').style.display = 'block';
-    document.getElementById('dashboard').style.display = 'none';
-
-    // Try direct fetch first
-    let csvText;
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      csvText = await response.text();
-    } catch (fetchError) {
-      console.log('Direct fetch failed, trying CORS proxy:', fetchError);
-
-      // Try with CORS proxy
-      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
-      const proxyResponse = await fetch(proxyUrl);
-      if (!proxyResponse.ok) throw new Error('CORS proxy failed');
-
-      const proxyData = await proxyResponse.json();
-      csvText = proxyData.contents;
-    }
-
-    if (!csvText || csvText.trim() === '') {
-      throw new Error('Empty or invalid CSV content');
-    }
-
-    parseCSVText(csvText, false);
-  } catch (error) {
-    console.error('Error loading from URL:', error);
-    document.getElementById('loading').style.display = 'none';
-
-    let errorMessage = 'Eroare la încărcarea din URL!\n\n';
-    if (error.message.includes('CORS')) {
-      errorMessage += 'Problema CORS: URL-ul nu permite accesul din browser.\n';
-      errorMessage += 'Încercați să:\n';
-      errorMessage += '• Folosiți un link direct către fișierul CSV\n';
-      errorMessage += '• Asigurați-vă că serverul permite CORS\n';
-      errorMessage += '• Încărcați fișierul local în schimb';
-    } else if (error.message.includes('HTTP 404')) {
-      errorMessage += 'Fișierul nu a fost găsit. Verificați URL-ul.';
-    } else if (error.message.includes('HTTP 403')) {
-      errorMessage += 'Acces interzis. Fișierul nu este public.';
-    } else {
-      errorMessage += `Detalii: ${error.message}`;
-    }
-
-    alert(errorMessage);
-  }
-}
-
-function handleFile(file) {
-  destroyAllCharts();
-  document.getElementById('loading').style.display = 'block';
-  document.getElementById('dashboard').style.display = 'none';
-
-  Papa.parse(file, {
-    header: true,
-    dynamicTyping: false,
-    skipEmptyLines: true,
-    encoding: 'UTF-8',
-    complete: function (results) {
-      parseCSVText(results.data, true);
-    },
-    error: function (error) {
-      console.error('Error parsing CSV:', error);
-      document.getElementById('loading').style.display = 'none';
-      alert('Eroare la procesarea fișierului CSV!');
-    }
-  });
-}
+// Removed upload and URL loading functions - data is now loaded automatically
 
 function parseCSVText(data, isFromFile = false) {
   console.log('Raw parsed data:', data);
