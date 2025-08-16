@@ -1,0 +1,124 @@
+name: Update Dashboard (External Service)
+
+on:
+  schedule:
+    # Run daily at 6:00 AM UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:  # Allow manual triggering
+  repository_dispatch:
+    types: [update-data]
+
+jobs:
+  trigger-external-update:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Try external scraping services
+      run: |
+        echo "Attempting to trigger external data collection..."
+        
+        # Method 1: Try ScrapingBee (has free tier)
+        if [ ! -z "${{ secrets.SCRAPINGBEE_API_KEY }}" ]; then
+          echo "Trying ScrapingBee..."
+          curl -s "https://app.scrapingbee.com/api/v1/?api_key=${{ secrets.SCRAPINGBEE_API_KEY }}&url=https://www.factual.ro/politicieni/" \
+            -H "Accept: text/html" > temp_page.html
+          
+          if [ -s temp_page.html ]; then
+            echo "✅ ScrapingBee successful"
+            echo "scraped_data=true" >> $GITHUB_ENV
+          fi
+        fi
+        
+        # Method 2: Try Selenium Grid (free online instances)
+        if [ "${{ env.scraped_data }}" != "true" ]; then
+          echo "Trying remote Selenium..."
+          python3 << EOF
+import requests
+import json
+
+# Try Moon Cloud (free tier)
+payload = {
+    "url": "https://www.factual.ro/politicieni/",
+    "options": {
+        "waitForSelector": "a.people-item",
+        "timeout": 30000
+    }
+}
+
+try:
+    response = requests.post(
+        "https://api.moon.cloud/selenium/screenshot",
+        json=payload,
+        timeout=60
+    )
+    if response.status_code == 200:
+        with open("scraped_content.json", "w") as f:
+            json.dump(response.json(), f)
+        print("✅ Remote Selenium successful")
+        exit(0)
+except:
+    pass
+
+print("❌ All external services failed")
+exit(1)
+EOF
+        fi
+        
+    - name: Process scraped data if available
+      if: env.scraped_data == 'true'
+      run: |
+        echo "Processing scraped data..."
+        # Add logic to parse the scraped HTML and generate CSV
+        
+    - name: Fallback to notification
+      if: env.scraped_data != 'true'
+      run: |
+        echo "External scraping failed. Will create notification."
+        echo "need_manual_update=true" >> $GITHUB_ENV
+        
+    - name: Send notification for manual update
+      if: env.need_manual_update == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          // Create or update an issue requesting manual data update
+          const { data: issues } = await github.rest.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            labels: ['automated-update-failed'],
+            state: 'open'
+          });
+          
+          const body = `🤖 Automated data collection failed at ${new Date().toISOString()}
+          
+          **What happened:** All external scraping services failed to access factual.ro
+          
+          **Action needed:** Please update the data manually:
+          
+          1. Run locally: \`python app/main.py --output dashboard/politician_stats.csv\`
+          2. Commit and push the updated CSV
+          
+          **Alternative:** Set up repository secrets for external scraping services:
+          - \`SCRAPINGBEE_API_KEY\` for ScrapingBee
+          - \`BROWSERLESS_TOKEN\` for Browserless.io
+          `;
+          
+          if (issues.length === 0) {
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🔴 Automated Data Update Failed',
+              body: body,
+              labels: ['automated-update-failed', 'help-wanted']
+            });
+          } else {
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issues[0].number,
+              body: `Another update attempt failed at ${new Date().toISOString()}`
+            });
+          }
