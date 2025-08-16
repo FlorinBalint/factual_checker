@@ -27,7 +27,7 @@ jobs:
     - name: Generate CSV data
       run: |
         cd app
-        python main.py --output ../dashboard/politician_stats.csv
+        python main.py --output ../dashboard/politician_stats.csv --generate_party_stats false
         
     - name: Check if CSV was generated
       run: |

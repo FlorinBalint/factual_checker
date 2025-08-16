@@ -62,6 +62,15 @@ __party_override = {
   'Mihai Lasca': 'AUR',
 }
 
+class BooleanAction(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        if values.lower() in ('yes', 'y', 'true'):
+            setattr(namespace, self.dest, True)
+        elif values.lower() in ('no', 'n', 'false'):
+            setattr(namespace, self.dest, False)
+        else:
+            raise argparse.ArgumentTypeError(f"Unsupported boolean value: {values}")
+
 __parser = argparse.ArgumentParser(
     prog='Factual Checker',
     description='Check the factual statements of a politician')
@@ -77,10 +86,11 @@ __parser.add_argument('-o', '--output',
                     type=str,
                     help='The output file name',
                         default='politician_stats.csv')
-__parser.add_argument('-d', '--debug',
-                    type=bool,
+__parser.add_argument('-d', '--debug', dest='debug',
+                    action=BooleanAction,                                        
+                    type=str, choices=['yes', 'no', 'true', 'false', 'y', 'n'],
                     help='Change the log level to debug',
-                    default=False)
+                    default='false')
 __parser.add_argument('-w', '--workers', type=int, 
                     help='The number of processes to use for crawling',
                     default=5)
@@ -89,6 +99,12 @@ __parser.add_argument('--stats_file', type=str,
                     help='An input file with the politician stats.' \
                     'If set, this file will be used to read the stats instead of crawling them.',
                     default=None)
+__parser.add_argument('--generate_party_stats', dest='generate_party_stats',
+                    action=BooleanAction,
+                    type=str, choices=['yes', 'no', 'true', 'false', 'y', 'n'],
+                    help='Wether to generate aggregated statistics per party',
+                    default='true'
+                  )
 
 
 def crawl_politician(politician):
@@ -124,35 +140,40 @@ def crawl_stats(args):
   return stats
 
 
+def main(args):
+  # This sets the root logger to write to stdout (your console).
+  # Your script/app needs to call this somewhere at least once.
+  if args.debug:
+    logging.basicConfig(level=logging.DEBUG)
+  else:
+    logging.basicConfig(level=logging.INFO)
+
+  output_file = args.output if args.output else 'politician_stats.csv'
+  if args.stats_file:
+    logging.debug('Reading stats from file %s' % args.stats_file)
+    stats = CsvReader(args.stats_file).read_politician_stats()
+  else: 
+    stats = crawl_stats(args)
+
+  # Print the results
+  logging.debug('Found non empty stats for %d politicians' % len(stats))
+
+  # Print the politicians stats
+  CsvPrinter(output_file).print_politicians(stats)
+
+  if not args.generate_party_stats:
+    return
+  
+  # Compute and print the party stats
+  party_stats_list = []
+  party_stats_dict = {}
+  for stat in stats:
+    if stat.affiliation.upper() not in party_stats_dict:
+      party_stats_dict[stat.affiliation.upper()] = []
+    party_stats_dict[stat.affiliation.upper()].append(stat)
+  for party, party_stats in party_stats_dict.items():
+    party_stats_list.append(PartyStats(party, party_stats))
+  CsvPrinter(f'party_{output_file}').print_party_stats(party_stats_list)
+
 if __name__ == "__main__":
-    args = __parser.parse_args()
-    # This sets the root logger to write to stdout (your console).
-    # Your script/app needs to call this somewhere at least once.
-    if args.debug:
-      logging.basicConfig(level=logging.DEBUG)
-    else:
-      logging.basicConfig(level=logging.INFO)
-
-    output_file = args.output if args.output else 'politician_stats.csv'
-    if args.stats_file:
-      logging.debug('Reading stats from file %s' % args.stats_file)
-      stats = CsvReader(args.stats_file).read_politician_stats()
-    else: 
-      stats = crawl_stats(args)
-
-    # Print the results
-    logging.debug('Found non empty stats for %d politicians' % len(stats))
-
-    # Print the politicians stats
-    CsvPrinter(output_file).print_politicians(stats)
-
-    # Print the party stats
-    party_stats_list = []
-    party_stats_dict = {}
-    for stat in stats:
-      if stat.affiliation.upper() not in party_stats_dict:
-        party_stats_dict[stat.affiliation.upper()] = []
-      party_stats_dict[stat.affiliation.upper()].append(stat)
-    for party, party_stats in party_stats_dict.items():
-      party_stats_list.append(PartyStats(party, party_stats))
-    CsvPrinter(f'party_{output_file}').print_party_stats(party_stats_list)
+    main(__parser.parse_args())
