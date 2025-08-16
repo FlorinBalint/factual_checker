@@ -27,7 +27,11 @@ jobs:
     - name: Generate CSV data
       run: |
         cd app
-        python main.py --output ../dashboard/politician_stats.csv --generate_party_stats false
+        # Reduce workers to avoid rate limiting
+        python main.py --output ../dashboard/politician_stats.csv --generate_party_stats false --workers 2
+      env:
+        # Add environment variables that might help with requests
+        PYTHONUNBUFFERED: 1
         
     - name: Check if CSV was generated
       run: |

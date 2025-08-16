@@ -1,5 +1,7 @@
 import requests
 import logging
+import time
+import random
 from pyquery import PyQuery as pq
 from politician_stats import PoliticianStats 
 from party_extractor import PartyExtractor
@@ -7,7 +9,13 @@ from party_extractor import PartyExtractor
 logger = logging.getLogger(__name__)
 
 class PoliticianFactsCrawler:
-    __browser_headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+    __browser_headers = [
+        {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'},
+        {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'},
+        {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'},
+        {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:120.0) Gecko/20100101 Firefox/120.0'},
+        {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:120.0) Gecko/20100101 Firefox/120.0'}
+    ]
     __fact_url = "https://www.factual.ro/persoane/%s/"
     __truth_statement_values = {'Adevărat', 'În mandat'}
     __false_statement_values = {'Fals', 'În afara mandatului'}
@@ -36,7 +44,23 @@ class PoliticianFactsCrawler:
 
     def parse_facts(self):
       logger.debug('Querying URL: ' + self.link)
-      response = requests.get(self.link, headers=PoliticianFactsCrawler.__browser_headers)
+      
+      # Add rate limiting and random delays
+      time.sleep(random.uniform(1, 3))
+      
+      # Rotate user agents
+      headers = random.choice(PoliticianFactsCrawler.__browser_headers)
+      
+      # Add session with retry logic
+      session = requests.Session()
+      session.headers.update(headers)
+      
+      try:
+        response = session.get(self.link, timeout=30)
+        response.raise_for_status()
+      except requests.exceptions.RequestException as e:
+        logger.error(f'Failed to fetch {self.link}: {e}')
+        return None
       doc = pq(response.text)
       statements = list(doc('span.statement-value-text').items())
 
