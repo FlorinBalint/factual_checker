@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Credibilitate Politicieni</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <link rel="stylesheet" href="dashboard_style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1><span class="emoji">📊</span> <span class="gradient-text">Dashboard Credibilitate Politicieni</span></h1>
+
+    <div class="upload-zone" id="uploadZone">
+      <div class="upload-text">📁 Încarcă fișierul CSV sau introdu URL-ul</div>
+      <div style="color: #7f8c8d; margin-bottom: 15px;">Trage și lasă fișierul aici sau fă click pentru a
+        selecta</div>
+      <input type="file" id="csvFile" accept=".csv" />
+
+      <div style="margin-top: 20px;">
+        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px;">
+          <input type="url" id="csvUrl" placeholder="https://example.com/data.csv"
+            style="flex: 1; padding: 10px; border: 2px solid #3498db; border-radius: 8px; font-size: 14px;">
+          <button id="loadFromUrl"
+            style="padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">
+            Încarcă din URL
+          </button>
+        </div>
+        <div style="font-size: 0.85em; color: #7f8c8d; line-height: 1.4;">
+          💡 <strong>Sfaturi pentru URL:</strong><br>
+          • GitHub Raw: https://raw.githubusercontent.com/user/repo/main/file.csv<br>
+          • Google Sheets: File → Publish → CSV format<br>
+          • Dropbox: Înlocuiește "dl=0" cu "dl=1" în link<br>
+          • Pentru alte servicii, asigură-te că link-ul este direct către CSV
+        </div>
+      </div>
+    </div>
+
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <div>Se procesează datele...</div>
+    </div>
+
+    <div id="dashboard" style="display: none;">
+      <div class="stats-grid" id="statsGrid"></div>
+
+      <!-- Filters -->
+      <div
+        style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+        <h3 style="margin-bottom: 15px; color: #2c3e50;">🔍 Filtre <span style="font-size: 0.8em; color: #7f8c8d; font-weight: normal;">(se aplică doar la Top Politicieni și Distribuția pe partide)</span></h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 15px;">
+          <div>
+            <label style="display: block; margin-bottom: 5px; font-weight: 600;">Partid:</label>
+            <select id="partyFilter" style="width: 100%; padding: 8px; border: 2px solid #ecf0f1; border-radius: 8px;">
+              <option value="">Toate partidele</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 5px; font-weight: 600;">Credibilitate minimă:</label>
+            <input type="range" id="credibilityFilter" min="0" max="100" value="0" style="width: 100%;"
+              oninput="document.getElementById('credibilityValue').textContent = this.value + '%'">
+            <div style="text-align: center; color: #7f8c8d; font-size: 0.9em;">
+              <span id="credibilityValue">0%</span>
+            </div>
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 5px; font-weight: 600;">Căutare nume:</label>
+            <input type="text" id="nameFilter" placeholder="Căută politician..."
+              style="width: 100%; padding: 8px; border: 2px solid #ecf0f1; border-radius: 8px;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 5px; font-weight: 600;">Minimum declarații:</label>
+            <input type="number" id="minStatementsFilter" min="0" value="0" placeholder="0"
+              style="width: 100%; padding: 8px; border: 2px solid #ecf0f1; border-radius: 8px;">
+          </div>
+        </div>
+        <button id="applyFilters"
+          style="margin-top: 15px; padding: 10px 30px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold;">
+          Aplică filtrele
+        </button>
+      </div>
+
+      <div class="charts-container">
+        <div class="chart-card">
+          <div class="chart-title">Cei mai credibili politicieni <span style="font-size: 0.8em; color: #7f8c8d;">(filtrat)</span></div>
+          <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <label style="font-size: 0.9em; color: #7f8c8d;">Afișează:</label>
+              <select id="topPoliticiansPerPage" style="padding: 5px 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="10" selected>10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+              </select>
+            </div>
+            <div id="topPoliticiansPagination" style="display: flex; gap: 5px; align-items: center;"></div>
+          </div>
+          <canvas id="topPoliticiansChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <div class="chart-title">Distribuția pe partide <span style="font-size: 0.8em; color: #7f8c8d;">(filtrat)</span></div>
+          <canvas id="partyChart"></canvas>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+          <div class="chart-title" style="max-width: 400px; line-height: 1.4;">
+            Tabel complet - Toți politicienii<br>
+            <span style="font-size: 0.75em; color: #7f8c8d; font-weight: normal;">
+              Nu este afectat de filtre. Click pe header pentru sortare.
+            </span>
+            <span id="resultCount" style="display: block; font-size: 0.8em; color: #34495e; margin-top: 5px;"></span>
+          </div>
+          <div style="display: flex; gap: 15px; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 5px;">
+              <label style="font-size: 0.9em; color: #7f8c8d;">Rânduri per pagină:</label>
+              <select id="rowsPerPage" style="padding: 5px 8px; border: 1px solid #ddd; border-radius: 4px;">
+                <option value="25">25</option>
+                <option value="50" selected>50</option>
+                <option value="100">100</option>
+                <option value="all">Toate</option>
+              </select>
+            </div>
+            <div id="pagination" style="display: flex; gap: 5px; align-items: center;"></div>
+          </div>
+        </div>
+        <table id="politiciansTable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="dashboard.js">
+  </script>
+</body>
+
+</html>
