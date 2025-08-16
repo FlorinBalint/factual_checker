@@ -67,6 +67,25 @@ csvUrl.addEventListener('keypress', (e) => {
   }
 });
 
+// Auto-load local CSV file if it exists
+window.addEventListener('DOMContentLoaded', () => {
+  // Try to load local CSV file first
+  fetch('./politician_stats.csv')
+    .then(response => {
+      if (response.ok) {
+        return response.text();
+      }
+      throw new Error('Local CSV not found');
+    })
+    .then(csvText => {
+      parseCSVText(csvText, false);
+    })
+    .catch(error => {
+      console.log('Local CSV not found, user will need to upload or provide URL');
+      // Dashboard remains in upload mode
+    });
+});
+
 // Filter event listeners
 document.getElementById('applyFilters').addEventListener('click', applyFilters);
 // Remove immediate filter listeners for name and min statements
