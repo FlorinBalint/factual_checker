@@ -12,7 +12,7 @@ fi
 # Verify our cron job exists
 if ! crontab -l 2>/dev/null | grep -q "/home/florin/Work/Repos/python/factual_checker/scripts/cron_wrapper.sh"; then
     echo "Re-adding politician stats cron job..."
-    (crontab -l 2>/dev/null; echo "0 8 * * * /home/florin/Work/Repos/python/factual_checker/scripts/cron_wrapper.sh") | crontab -
+    (crontab -l 2>/dev/null; echo "0 20 * * * /home/florin/Work/Repos/python/factual_checker/scripts/cron_wrapper.sh") | crontab -
 fi
 
 echo "Politician stats cron job verified"

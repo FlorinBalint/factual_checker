@@ -3,19 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=political_dashboard.html">
     <title>Dashboard Credibilitate Politicieni România</title>
     <meta name="description" content="Dashboard interactiv cu statistici de credibilitate ale politicienilor români bazate pe verificarea factelor">
     <meta name="keywords" content="politicieni, credibilitate, fact-checking, România, statistici">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            color: white;
+            text-align: center;
+        }
+        .redirect-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        a {
+            color: white;
+            text-decoration: underline;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+    </style>
     <script>
-        // Redirect to the main dashboard
-        window.location.href = './political_dashboard.html';
+        // JavaScript fallback redirect
+        setTimeout(function() {
+            window.location.href = 'political_dashboard.html';
+        }, 100);
     </script>
 </head>
 <body>
-    <div style="text-align: center; margin-top: 50px; font-family: Arial, sans-serif;">
-        <h1>Dashboard Credibilitate Politicieni</h1>
-        <p>Se încarcă dashboard-ul...</p>
-        <p><a href="./political_dashboard.html">Click aici dacă nu sunteți redirecționat automat</a></p>
+    <div class="redirect-container">
+        <div class="spinner"></div>
+        <h1>📊 Dashboard Credibilitate Politicieni</h1>
+        <p>Se redirecționează către dashboard...</p>
+        <p><a href="political_dashboard.html">Apasă aici dacă nu ești redirecționat automat</a></p>
     </div>
 </body>
 </html>

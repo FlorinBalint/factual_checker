@@ -156,7 +156,7 @@ chmod +x "$STARTUP_SCRIPT"
 
 echo ""
 echo "=== Setup Complete ==="
-echo "✅ Cron job configured to run daily at 8:00 AM"
+echo "✅ Cron job configured to run daily at 20:00"
 echo "✅ Wrapper script created: $CRON_WRAPPER"
 echo "✅ Update script: $UPDATE_SCRIPT"
 
@@ -180,7 +180,7 @@ echo "Add this to your startup applications or .bashrc:"
 echo "$STARTUP_SCRIPT"
 
 echo ""
-echo "The script will run daily at 19:00 PM and:"
+echo "The script will run daily at 20:00 and:"
 echo "- Generate new politician stats"
 echo "- Commit changes to git"
 echo "- Push to GitHub"
