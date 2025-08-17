@@ -42,10 +42,8 @@ jobs:
         run: |
           mkdir -p _site
           
-          # Copy and minify HTML files
-          find dashboard -name "*.html" -exec sh -c '
-            html-minifier-terser --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --minify-css true --minify-js true "$1" -o "_site/$(basename "$1")"
-          ' _ {} \;
+          # Copy HTML files without minification (safer)
+          find dashboard -name "*.html" -exec cp {} _site/ \;
           
           # Copy and minify CSS files
           find dashboard -name "*.css" -exec sh -c '
@@ -66,8 +64,8 @@ jobs:
           # Copy CSV data (no minification needed)
           find dashboard -name "*.csv" -exec cp {} _site/ \;
           
-          # Minify root index.html
-          html-minifier-terser --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --minify-css true --minify-js true index.html -o _site/index.html
+          # Copy root index.html without minification
+          cp index.html _site/index.html
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
