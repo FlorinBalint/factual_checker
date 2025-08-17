@@ -42,15 +42,17 @@ jobs:
         run: |
           mkdir -p _site
           
-          # Copy HTML files without minification (safer)
-          find dashboard -name "*.html" -exec cp {} _site/ \;
+          # Copy and minify HTML files directly to root
+          find dashboard -name "*.html" -exec sh -c '
+            html-minifier-terser --collapse-whitespace --remove-comments --minify-css true --minify-js true --preserve-line-breaks --keep-closing-slash --case-sensitive "$1" -o "_site/$(basename "$1")"
+          ' _ {} \;
           
-          # Copy and minify CSS files
+          # Copy and minify CSS files directly to root
           find dashboard -name "*.css" -exec sh -c '
             csso "$1" --output "_site/$(basename "$1")"
           ' _ {} \;
           
-          # Copy and minify JS files (preserve ES6 modules)
+          # Copy and minify JS files directly to root (preserve ES6 modules)
           find dashboard -name "*.js" -exec sh -c '
             terser "$1" --compress --mangle --module -o "_site/$(basename "$1")"
           ' _ {} \;
@@ -61,11 +63,8 @@ jobs:
             terser "$1" --compress --mangle --module -o "_site/modules/$(basename "$1")"
           ' _ {} \;
           
-          # Copy CSV data (no minification needed)
+          # Copy CSV data directly to root
           find dashboard -name "*.csv" -exec cp {} _site/ \;
-          
-          # Copy root index.html without minification
-          cp index.html _site/index.html
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
