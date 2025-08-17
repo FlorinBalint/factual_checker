@@ -78,10 +78,22 @@ input[type="file"] {
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 15px;
   margin-bottom: 30px;
   max-width: 100%;
+}
+
+/* Responsive grid for stats cards */
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .stat-card {
@@ -177,12 +189,7 @@ input[type="file"] {
   font-weight: 500;
 }
 
-.charts-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  margin-bottom: 30px;
-}
+/* Removed - now using Bootstrap grid */
 
 .chart-card {
   background: white;
@@ -190,6 +197,14 @@ input[type="file"] {
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.05);
+  min-height: 500px;
+  height: auto;
+  overflow: visible;
+}
+
+.chart-card canvas {
+  max-width: 100%;
+  width: 100%;
 }
 
 .chart-title {
@@ -417,24 +432,117 @@ tr:hover {
   cursor: not-allowed;
 }
 
+/* Enhanced responsive design */
 @media (max-width: 768px) {
-  .charts-container {
-    grid-template-columns: 1fr;
-  }
-
   h1 {
     font-size: 2em;
   }
 
   .container {
-    padding: 20px;
+    padding: 15px;
   }
 
-  .pagination {
-    flex-wrap: wrap;
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
+  
+  .stat-card {
+    padding: 15px;
+  }
+  
+  .chart-card {
+    padding: 15px;
+    min-height: 300px;
+  }
+  
+  .table-container {
+    padding: 10px;
+    overflow-x: auto;
+  }
+  
+  /* Responsive table for mobile landscape */
+  table {
+    min-width: 600px;
+    font-size: 0.8em;
+  }
+  
+  th, td {
+    padding: 8px 6px;
+  }
+  
+  /* Adjust column widths for mobile */
+  th:nth-child(1), td:nth-child(1) { width: 100px; } /* Nume */
+  th:nth-child(2), td:nth-child(2) { width: 80px; }  /* Partid */
+  th:nth-child(3), td:nth-child(3) { width: 120px; } /* Credibilitate */
+  th:nth-child(4), td:nth-child(4) { width: 60px; }  /* Total declarații */
+  th:nth-child(5), td:nth-child(5) { width: 55px; }  /* Adevărate */
+  th:nth-child(6), td:nth-child(6) { width: 65px; }  /* Parțial adevărate */
+  th:nth-child(7), td:nth-child(7) { width: 55px; }  /* Trunchiate */
+  th:nth-child(8), td:nth-child(8) { width: 50px; }  /* False */
+  th:nth-child(9), td:nth-child(9) { width: 75px; }  /* Imposibil verificat */
+}
 
-  .filters-grid {
-    grid-template-columns: 1fr !important;
+/* Mobile landscape specific optimizations */
+@media (max-width: 768px) and (orientation: landscape) {
+  .table-container {
+    padding: 8px;
+  }
+  
+  table {
+    min-width: 550px;
+    font-size: 0.75em;
+  }
+  
+  th, td {
+    padding: 6px 4px;
+  }
+  
+  /* Even more compact columns for landscape */
+  th:nth-child(1), td:nth-child(1) { width: 90px; }  /* Nume */
+  th:nth-child(2), td:nth-child(2) { width: 70px; }  /* Partid */
+  th:nth-child(3), td:nth-child(3) { width: 100px; } /* Credibilitate */
+  th:nth-child(4), td:nth-child(4) { width: 50px; }  /* Total declarații */
+  th:nth-child(5), td:nth-child(5) { width: 45px; }  /* Adevărate */
+  th:nth-child(6), td:nth-child(6) { width: 55px; }  /* Parțial adevărate */
+  th:nth-child(7), td:nth-child(7) { width: 45px; }  /* Trunchiate */
+  th:nth-child(8), td:nth-child(8) { width: 40px; }  /* False */
+  th:nth-child(9), td:nth-child(9) { width: 65px; }  /* Imposibil verificat */
+  
+  /* Compact credibility bar for mobile landscape */
+  .credibility-bar {
+    height: 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 1.8em;
+  }
+  
+  .container {
+    padding: 10px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .stat-card {
+    padding: 12px;
+  }
+  
+  .stat-value {
+    font-size: 1.5em;
+  }
+  
+  .chart-card {
+    padding: 12px;
+    min-height: 250px;
+  }
+  
+  .table-container {
+    padding: 10px;
   }
 }

@@ -9,6 +9,7 @@
   <meta name="keywords" content="politicieni, credibilitate, fact-checking, România, statistici">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="dashboard_style.css">
 </head>
 
@@ -33,14 +34,14 @@
       <div
         style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
         <h3 style="margin-bottom: 15px; color: #2c3e50;">🔍 Filtre <span style="font-size: 0.8em; color: #7f8c8d; font-weight: normal;">(se aplică doar la Top Politicieni și Distribuția pe partide)</span></h3>
-        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 15px;">
-          <div>
+        <div class="row g-3">
+          <div class="col-lg-3 col-md-6">
             <label style="display: block; margin-bottom: 5px; font-weight: 600;">Partid:</label>
             <select id="partyFilter" style="width: 100%; padding: 8px; border: 2px solid #ecf0f1; border-radius: 8px;">
               <option value="">Toate partidele</option>
             </select>
           </div>
-          <div>
+          <div class="col-lg-3 col-md-6">
             <label style="display: block; margin-bottom: 5px; font-weight: 600;">Credibilitate minimă:</label>
             <input type="range" id="credibilityFilter" min="0" max="100" value="0" style="width: 100%;"
               oninput="document.getElementById('credibilityValue').textContent = this.value + '%'">
@@ -48,12 +49,12 @@
               <span id="credibilityValue">0%</span>
             </div>
           </div>
-          <div>
+          <div class="col-lg-3 col-md-6">
             <label style="display: block; margin-bottom: 5px; font-weight: 600;">Căutare nume:</label>
             <input type="text" id="nameFilter" placeholder="Căută politician..."
               style="width: 100%; padding: 8px; border: 2px solid #ecf0f1; border-radius: 8px;">
           </div>
-          <div>
+          <div class="col-lg-3 col-md-6">
             <label style="display: block; margin-bottom: 5px; font-weight: 600;">Minimum declarații:</label>
             <input type="number" id="minStatementsFilter" min="0" value="0" placeholder="0"
               style="width: 100%; padding: 8px; border: 2px solid #ecf0f1; border-radius: 8px;">
@@ -65,50 +66,58 @@
         </button>
       </div>
 
-      <div class="charts-container">
-        <div class="chart-card">
-          <div class="chart-title">Cei mai credibili politicieni <span style="font-size: 0.8em; color: #7f8c8d;">(filtrat)</span></div>
-          <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
-            <div style="display: flex; gap: 10px; align-items: center;">
-              <label style="font-size: 0.9em; color: #7f8c8d;">Afișează:</label>
-              <select id="topPoliticiansPerPage" style="padding: 5px 8px; border: 1px solid #ddd; border-radius: 4px;">
-                <option value="10" selected>10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-                <option value="25">25</option>
-              </select>
+      <div class="row g-4 mb-4">
+        <div class="col-lg-6">
+          <div class="chart-card">
+            <div class="chart-title">Cei mai credibili politicieni <span style="font-size: 0.8em; color: #7f8c8d;">(filtrat)</span></div>
+            <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <label style="font-size: 0.9em; color: #7f8c8d;">Afișează:</label>
+                <select id="topPoliticiansPerPage" style="padding: 5px 8px; border: 1px solid #ddd; border-radius: 4px;">
+                  <option value="10" selected>10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                  <option value="25">25</option>
+                </select>
+              </div>
+              <div id="topPoliticiansPagination" style="display: flex; gap: 5px; align-items: center; flex-wrap: wrap;"></div>
             </div>
-            <div id="topPoliticiansPagination" style="display: flex; gap: 5px; align-items: center;"></div>
+            <canvas id="topPoliticiansChart"></canvas>
           </div>
-          <canvas id="topPoliticiansChart"></canvas>
         </div>
 
-        <div class="chart-card">
-          <div class="chart-title">Distribuția pe partide <span style="font-size: 0.8em; color: #7f8c8d;">(filtrat)</span></div>
-          <canvas id="partyChart"></canvas>
+        <div class="col-lg-6">
+          <div class="chart-card">
+            <div class="chart-title">Distribuția pe partide <span style="font-size: 0.8em; color: #7f8c8d;">(filtrat)</span></div>
+            <canvas id="partyChart"></canvas>
+          </div>
         </div>
       </div>
 
       <div class="table-container">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
-          <div class="chart-title" style="max-width: 400px; line-height: 1.4;">
-            Tabel complet - Toți politicienii<br>
-            <span style="font-size: 0.75em; color: #7f8c8d; font-weight: normal;">
-              Nu este afectat de filtre. Click pe header pentru sortare.
-            </span>
-            <span id="resultCount" style="display: block; font-size: 0.8em; color: #34495e; margin-top: 5px;"></span>
-          </div>
-          <div style="display: flex; gap: 15px; align-items: center;">
-            <div style="display: flex; align-items: center; gap: 5px;">
-              <label style="font-size: 0.9em; color: #7f8c8d;">Rânduri per pagină:</label>
-              <select id="rowsPerPage" style="padding: 5px 8px; border: 1px solid #ddd; border-radius: 4px;">
-                <option value="25">25</option>
-                <option value="50" selected>50</option>
-                <option value="100">100</option>
-                <option value="all">Toate</option>
-              </select>
+        <div class="row mb-3">
+          <div class="col-lg-6 col-md-12 mb-3 mb-lg-0">
+            <div class="chart-title" style="line-height: 1.4; text-align: left;">
+              Tabel complet - Toți politicienii<br>
+              <span style="font-size: 0.75em; color: #7f8c8d; font-weight: normal;">
+                Nu este afectat de filtre. Click pe header pentru sortare.
+              </span>
+              <span id="resultCount" style="display: block; font-size: 0.8em; color: #34495e; margin-top: 5px;"></span>
             </div>
-            <div id="pagination" style="display: flex; gap: 5px; align-items: center;"></div>
+          </div>
+          <div class="col-lg-6 col-md-12">
+            <div class="d-flex flex-wrap gap-3 align-items-center justify-content-lg-end">
+              <div class="d-flex align-items-center gap-2">
+                <label style="font-size: 0.9em; color: #7f8c8d; white-space: nowrap;">Rânduri per pagină:</label>
+                <select id="rowsPerPage" style="padding: 5px 8px; border: 1px solid #ddd; border-radius: 4px;">
+                  <option value="25">25</option>
+                  <option value="50" selected>50</option>
+                  <option value="100">100</option>
+                  <option value="all">Toate</option>
+                </select>
+              </div>
+              <div id="pagination" style="display: flex; gap: 5px; align-items: center; flex-wrap: wrap;"></div>
+            </div>
           </div>
         </div>
         <table id="politiciansTable">
@@ -119,6 +128,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="dashboard.js">
   </script>
 </body>

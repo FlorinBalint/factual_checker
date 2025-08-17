@@ -17,6 +17,10 @@ let isUpdatingFilters = false;
 window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('loading').style.display = 'block';
   
+  // Reset page size selectors to default values
+  document.getElementById('topPoliticiansPerPage').value = '10';
+  document.getElementById('rowsPerPage').value = '50';
+  
   // Load local CSV file
   fetch('./politician_stats.csv')
     .then(response => {
@@ -212,9 +216,15 @@ function generateTopPoliticiansChart() {
   const canvas = document.getElementById('topPoliticiansChart');
   const ctx = canvas.getContext('2d');
 
-  // Set fixed canvas dimensions to prevent size issues
-  canvas.width = 800;
-  canvas.height = Math.min(500, currentData.length * 35 + 100);
+  // Set sensible height limits (adjust for screen size) - increased to match party chart
+  const screenWidth = window.innerWidth;
+  const maxHeight = screenWidth < 768 ? 500 : 600;
+  const minHeight = screenWidth < 768 ? 300 : 400;
+  const calculatedHeight = Math.min(maxHeight, Math.max(minHeight, currentData.length * 35 + 100));
+  
+  // Set fixed height to prevent infinite growth
+  canvas.style.height = calculatedHeight + 'px';
+  canvas.height = calculatedHeight;
 
   charts.topPoliticians = new Chart(ctx, {
     type: 'bar',
@@ -222,7 +232,7 @@ function generateTopPoliticiansChart() {
       labels: currentData.map(p => p.nume),
       datasets: [{
         label: 'Credibilitate (%)',
-        data: currentData.map(p => p.credibilitate === 0 ? 0.5 : p.credibilitate),
+        data: currentData.map(p => p.credibilitate === 0 ? 0.1 : p.credibilitate),
         backgroundColor: currentData.map((_, i) => `hsla(${200 + i * 10}, 70%, 60%, 0.8)`),
         borderColor: currentData.map((_, i) => `hsla(${200 + i * 10}, 70%, 50%, 1)`),
         borderWidth: 2
@@ -232,6 +242,10 @@ function generateTopPoliticiansChart() {
       indexAxis: 'y',
       responsive: false,
       maintainAspectRatio: false,
+      interaction: {
+        intersect: true,
+        mode: 'nearest'
+      },
       scales: {
         x: {
           beginAtZero: true,
@@ -300,7 +314,7 @@ function generatePartyChart() {
   const canvas = document.getElementById('partyChart');
   const ctx = canvas.getContext('2d');
 
-  // Set fixed canvas dimensions to prevent size issues
+  // Set fixed canvas dimensions like before responsive changes
   canvas.width = 600;
   canvas.height = 400;
 
@@ -348,9 +362,9 @@ function generatePartyChart() {
               return true;
             }
           },
-          onClick: function(e, legendItem, legend) {
+          onClick: function(e, legendItem) {
             // Handle legend clicks to filter by party
-            if (legendItem.index >= 0) {
+            if (legendItem && legendItem.index >= 0) {
               const party = chartPartyData[legendItem.index].party;
               document.getElementById('partyFilter').value = party;
               applyFilters();
@@ -398,7 +412,7 @@ function updateChartTitles() {
   const minStatementsFilter = parseInt(document.getElementById('minStatementsFilter')?.value || 0);
   
   const isFiltered = partyFilter || credibilityFilter > 0 || nameFilter || minStatementsFilter > 0;
-  const partyChartTitle = document.querySelector('.chart-card:nth-child(2) .chart-title');
+  const partyChartTitle = document.querySelector('#partyChart').closest('.chart-card').querySelector('.chart-title');
   
   if (isFiltered) {
     partyChartTitle.innerHTML = 'Distribuția pe partide <span style="font-size: 0.8em; color: #e74c3c; font-weight: bold;">(FILTRAT)</span>';
