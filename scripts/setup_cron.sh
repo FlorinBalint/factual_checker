@@ -60,7 +60,7 @@ EOF
 chmod +x "$CRON_WRAPPER"
 
 # Create cron job entry
-CRON_ENTRY="0 8 * * * $CRON_WRAPPER"
+CRON_ENTRY="0 20 * * * $CRON_WRAPPER"
 
 # Check if cron job already exists
 if crontab -l 2>/dev/null | grep -q "$CRON_WRAPPER"; then
@@ -70,7 +70,7 @@ if crontab -l 2>/dev/null | grep -q "$CRON_WRAPPER"; then
 fi
 
 # Add new cron job
-echo "Adding cron job to run daily at 8:00 AM..."
+echo "Adding cron job to run daily at 20:00 ..."
 (crontab -l 2>/dev/null; echo "$CRON_ENTRY") | crontab -
 
 # Verify cron job was added
@@ -180,7 +180,7 @@ echo "Add this to your startup applications or .bashrc:"
 echo "$STARTUP_SCRIPT"
 
 echo ""
-echo "The script will run daily at 8:00 AM and:"
+echo "The script will run daily at 19:00 PM and:"
 echo "- Generate new politician stats"
 echo "- Commit changes to git"
 echo "- Push to GitHub"

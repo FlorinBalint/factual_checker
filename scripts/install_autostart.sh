@@ -188,6 +188,6 @@ echo "3. Check logs after reboot: tail -f $PROJECT_DIR/logs/update_\$(date +%Y%m
 echo ""
 echo "The system will now automatically:"
 echo "• Ensure cron jobs exist after each reboot"
-echo "• Run daily politician stats updates at 8:00 AM"
+echo "• Run daily politician stats updates at 20:00"
 echo "• Push updates to GitHub automatically"
 echo "• Keep your dashboard current"
