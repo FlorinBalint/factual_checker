@@ -26,14 +26,48 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install minification tools
+        run: |
+          npm install -g terser csso-cli html-minifier-terser
+        
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
-      - name: Copy dashboard files and root index
+      - name: Copy and minify dashboard files
         run: |
           mkdir -p _site
-          cp -r dashboard/* _site/
-          cp index.html _site/
+          
+          # Copy and minify HTML files
+          find dashboard -name "*.html" -exec sh -c '
+            html-minifier-terser --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --minify-css true --minify-js true "$1" -o "_site/$(basename "$1")"
+          ' _ {} \;
+          
+          # Copy and minify CSS files
+          find dashboard -name "*.css" -exec sh -c '
+            csso "$1" --output "_site/$(basename "$1")"
+          ' _ {} \;
+          
+          # Copy and minify JS files (preserve ES6 modules)
+          find dashboard -name "*.js" -exec sh -c '
+            terser "$1" --compress --mangle --module -o "_site/$(basename "$1")"
+          ' _ {} \;
+          
+          # Handle modules directory
+          mkdir -p _site/modules
+          find dashboard/modules -name "*.js" -exec sh -c '
+            terser "$1" --compress --mangle --module -o "_site/modules/$(basename "$1")"
+          ' _ {} \;
+          
+          # Copy CSV data (no minification needed)
+          find dashboard -name "*.csv" -exec cp {} _site/ \;
+          
+          # Minify root index.html
+          html-minifier-terser --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --minify-css true --minify-js true index.html -o _site/index.html
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
