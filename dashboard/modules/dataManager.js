@@ -124,7 +124,7 @@ export class DataManager {
     const totalUnverifiable = dataToUse.reduce((sum, p) => sum + p.imposibilDeVerificat, 0);
 
     const avgStatementCredibility = totalStatements > 0 
-      ? ((totalTrue * 100 + totalPartialTrue * 50 + totalFalse * 0) / totalStatements).toFixed(1) 
+      ? ((totalTrue * 100 + totalPartialTrue * 50 + totalTruncated * 25 + totalFalse * 0) / totalStatements).toFixed(1) 
       : '0';
 
     return {

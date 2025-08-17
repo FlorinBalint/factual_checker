@@ -17,9 +17,50 @@
   <div class="container">
     <h1><span class="emoji">📊</span> <span class="gradient-text">Dashboard Credibilitate Politicieni</span></h1>
 
-    <div class="status-zone" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 15px; margin-bottom: 30px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+    <div class="status-zone" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
       <div style="font-size: 1.2em; margin-bottom: 10px;">📊 Date actualizate automat</div>
       <div style="font-size: 0.9em; opacity: 0.9;">Datele sunt actualizate zilnic și afișate automat</div>
+    </div>
+
+    <!-- Information about credibility calculation -->
+    <div style="background: white; padding: 20px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-left: 4px solid #3498db;">
+      <h3 style="margin-bottom: 15px; color: #2c3e50; display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 1.5em;">ℹ️</span>
+        Despre calcularea credibilității
+      </h3>
+      <div style="line-height: 1.6; color: #34495e;">
+        <p style="margin-bottom: 15px;">
+          <strong>Sursa datelor:</strong> Toate declarațiile politicienilor sunt verificate și clasificate de <a href="https://factual.ro" target="_blank" style="color: #3498db; text-decoration: none; font-weight: bold;">Factual.ro</a>, 
+          o platformă independentă de verificare a faptelor din România.
+        </p>
+        <p style="margin-bottom: 15px;">
+          <strong>Calculul credibilității:</strong> Scorul de credibilitate se calculează pe baza unei medii ponderate a tuturor declarațiilor verificate:
+        </p>
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
+          Credibilitate (%) = (Declarații adevărate × 100% + Declarații parțial adevărate × 50% + Declarații trunchiate × 25%) ÷ Total declarații verificate
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 12px; height: 12px; background: #0e9245; border-radius: 50%; display: inline-block;"></span>
+            <span style="font-size: 0.9em;"><strong>Adevărate:</strong> 100% punctaj</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 12px; height: 12px; background: #5bec98; border-radius: 50%; display: inline-block;"></span>
+            <span style="font-size: 0.9em;"><strong>Parțial adevărate:</strong> 50% punctaj</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 12px; height: 12px; background: #e47e7e; border-radius: 50%; display: inline-block;"></span>
+            <span style="font-size: 0.9em;"><strong>Trunchiate:</strong> 25% punctaj</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 12px; height: 12px; background: #e74c3c; border-radius: 50%; display: inline-block;"></span>
+            <span style="font-size: 0.9em;"><strong>False:</strong> 0% punctaj</span>
+          </div>
+        </div>
+        <p style="margin-top: 15px; font-size: 0.9em; color: #7f8c8d; font-style: italic;">
+          * Declarațiile "Imposibil de verificat" nu sunt incluse în calculul credibilității.
+        </p>
+      </div>
     </div>
 
     <div class="loading" id="loading">
