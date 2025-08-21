@@ -111,7 +111,6 @@ export class ChartsManager {
                   `False: ${politician.false}`,
                   `Trunchiate: ${politician.trunchiate}`,
                   `Imposibil verificat: ${politician.imposibilDeVerificat}`,
-                  `Declaratii: ${politician.link}`
                 ];
               }
             }

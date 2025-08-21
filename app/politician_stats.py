@@ -30,6 +30,7 @@ class PoliticianStats:
     def __str__(self):
         return "Nume: %s, Pagina: %s, Afiliere %s, Credibilitate: %.2f, Număr declarații: %s, Imposibil de verificat %s, False: %s, Trunchiate: %s, Parțial adevărate: %s, Adevărate: %s" % (
                                                                                                                                             self.name,
+                                                                                                                                            self.url,
                                                                                                                                             self.affiliation,
                                                                                                                                             self.credibility,
                                                                                                                                             self.total,
