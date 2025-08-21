@@ -22,7 +22,7 @@ export class TableManager {
    */
   generateTable(tableId, data, pagination, onSortCallback) {
     const table = document.getElementById(tableId);
-    
+
     // Update result count
     const resultCountEl = document.getElementById('resultCount');
     if (resultCountEl) {
@@ -64,7 +64,7 @@ export class TableManager {
       <tbody>
         ${data.map(p => `
           <tr>
-            <td><strong>${p.nume}</strong></td>
+            <td><a href=${p.link}><strong>${p.nume}</strong></a></td>
             <td>${p.afiliere}</td>
             <td>
               <div style="display: flex; align-items: center; gap: 10px;">
@@ -93,7 +93,7 @@ export class TableManager {
         this.currentSortColumn = column;
         this.currentSortDirection = 'desc';
       }
-      
+
       if (onSortCallback) {
         onSortCallback(this.currentSortColumn, this.currentSortDirection);
       }

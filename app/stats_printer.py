@@ -1,7 +1,7 @@
 import csv
 
 class CsvPrinter:
-    __file_header = ['Nume', 'Afiliere', 'Credibilitate', 'Număr declarații', 'Imposibil de verificat', 'False', 'Trunchiate', 'Parțial adevărate', 'Adevărate']
+    __file_header = ['Nume', 'Afiliere', 'Pagina', 'Credibilitate', 'Număr declarații', 'Imposibil de verificat', 'False', 'Trunchiate', 'Parțial adevărate', 'Adevărate']
 
     def __init__(self, file_name):
         self.file_name = file_name
@@ -16,6 +16,7 @@ class CsvPrinter:
         for politician_stat in politician_stats:
           new_row = (politician_stat.name, 
                      politician_stat.affiliation if politician_stat.affiliation else '',
+                     politician_stat.url,
                      f'{round(politician_stat.credibility, 2)}%',
                      politician_stat.total,
                      politician_stat.impossible_to_check_count,

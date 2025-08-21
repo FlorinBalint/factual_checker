@@ -66,6 +66,7 @@ export class DataManager {
       return {
         nume: cleanRow.Nume || '',
         afiliere: cleanRow.Afiliere || '',
+        link: cleanRow.Pagina || '',
         credibilitate: credibilitate,
         numarDeclaratii: parseInt(cleanRow['Numr declaraii'] || cleanRow['Număr declarații'] || 0) || 0,
         imposibilDeVerificat: parseInt(cleanRow['Imposibil de verificat'] || 0) || 0,
@@ -84,7 +85,7 @@ export class DataManager {
    */
   applyFilters(filters) {
     const { party, credibility, name, minStatements } = filters;
-    
+
     this.filteredData = this.politiciansData.filter(p => {
       if (party && p.afiliere !== party) return false;
       if (p.credibilitate < credibility) return false;
@@ -111,11 +112,11 @@ export class DataManager {
   getStatistics(useFiltered = false) {
     const dataToUse = useFiltered ? this.filteredData : this.politiciansData;
     const totalPoliticians = dataToUse.length;
-    
-    const avgPoliticianCredibility = totalPoliticians > 0 
-      ? (dataToUse.reduce((sum, p) => sum + p.credibilitate, 0) / totalPoliticians).toFixed(1) 
+
+    const avgPoliticianCredibility = totalPoliticians > 0
+      ? (dataToUse.reduce((sum, p) => sum + p.credibilitate, 0) / totalPoliticians).toFixed(1)
       : '0';
-    
+
     const totalStatements = dataToUse.reduce((sum, p) => sum + p.numarDeclaratii, 0);
     const totalTrue = dataToUse.reduce((sum, p) => sum + p.adevarate, 0);
     const totalFalse = dataToUse.reduce((sum, p) => sum + p.false, 0);
@@ -123,8 +124,8 @@ export class DataManager {
     const totalTruncated = dataToUse.reduce((sum, p) => sum + p.trunchiate, 0);
     const totalUnverifiable = dataToUse.reduce((sum, p) => sum + p.imposibilDeVerificat, 0);
 
-    const avgStatementCredibility = totalStatements > 0 
-      ? ((totalTrue * 100 + totalPartialTrue * 75 + totalTruncated * 25 + totalFalse * 0) / totalStatements).toFixed(1) 
+    const avgStatementCredibility = totalStatements > 0
+      ? ((totalTrue * 100 + totalPartialTrue * 75 + totalTruncated * 25 + totalFalse * 0) / totalStatements).toFixed(1)
       : '0';
 
     return {
@@ -146,7 +147,7 @@ export class DataManager {
   getPartyStatistics(useFiltered = false) {
     const dataToUse = useFiltered ? this.filteredData : this.politiciansData;
     const partyStats = {};
-    
+
     dataToUse.forEach(p => {
       if (!partyStats[p.afiliere]) {
         partyStats[p.afiliere] = { count: 0, totalCredibility: 0 };
@@ -195,7 +196,7 @@ export class DataManager {
     const totalPages = Math.ceil(data.length / perPage);
     const startIndex = (page - 1) * perPage;
     const endIndex = startIndex + perPage;
-    
+
     return {
       data: data.slice(startIndex, endIndex),
       totalPages,

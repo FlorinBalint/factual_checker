@@ -49,7 +49,7 @@ export class ChartsManager {
     const maxHeight = screenWidth < 768 ? 500 : 600;
     const minHeight = screenWidth < 768 ? 300 : 400;
     const calculatedHeight = Math.min(maxHeight, Math.max(minHeight, data.length * 35 + 100));
-    
+
     // Set fixed height to prevent infinite growth
     canvas.style.height = calculatedHeight + 'px';
     canvas.height = calculatedHeight;
@@ -110,7 +110,8 @@ export class ChartsManager {
                   `Parțial adevărate: ${politician.partialAdevarate}`,
                   `False: ${politician.false}`,
                   `Trunchiate: ${politician.trunchiate}`,
-                  `Imposibil verificat: ${politician.imposibilDeVerificat}`
+                  `Imposibil verificat: ${politician.imposibilDeVerificat}`,
+                  `Declaratii: ${politician.link}`
                 ];
               }
             }
@@ -150,7 +151,7 @@ export class ChartsManager {
       options: {
         responsive: false,
         maintainAspectRatio: false,
-        onClick: function(event, elements) {
+        onClick: function (event, elements) {
           if (elements.length > 0 && onFilterCallback) {
             const elementIndex = elements[0].index;
             const party = partyData[elementIndex].party;
@@ -176,11 +177,11 @@ export class ChartsManager {
                   };
                 });
               },
-              filter: function(legendItem, chartData) {
+              filter: function (legendItem, chartData) {
                 return true;
               }
             },
-            onClick: function(e, legendItem) {
+            onClick: function (e, legendItem) {
               if (legendItem && legendItem.index >= 0 && onFilterCallback) {
                 const party = partyData[legendItem.index].party;
                 onFilterCallback(party);

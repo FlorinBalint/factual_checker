@@ -85,6 +85,14 @@ class PoliticianFactsCrawler:
           logger.warning(f'Unknown statement value {statement.text()} for politician {self.name}')
 
       party = PartyExtractor(self.party).extract_party(doc)
-      res = PoliticianStats(self.name, party, impossible_to_check_st, false_st, truncated_st, partially_true_st, truth_st)
+      res = PoliticianStats(
+         name= self.name,
+         url=self.link,
+         affiliation=party,
+         truncated_count=truncated_st,
+         true_count=truth_st,
+         partially_true_count=partially_true_st,
+         impossible_to_check_count=impossible_to_check_st, 
+         false_count=false_st)
       logger.debug('Found stats for politician %s with %d: %s' % (self.name, len(statements), str(res)))
       return res
