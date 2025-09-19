@@ -23,8 +23,11 @@ if [ ! -x "$UPDATE_SCRIPT" ]; then
     chmod +x "$UPDATE_SCRIPT"
 fi
 
-# Create a wrapper script for cron (handles environment variables)
-CRON_WRAPPER="$SCRIPT_DIR/cron_wrapper.sh"
+# Create a wrapper script for cron outside project directory (handles environment variables)
+# Use ~/.local/bin which is a standard location for user scripts
+WRAPPER_DIR="$HOME/.local/bin"
+mkdir -p "$WRAPPER_DIR"
+CRON_WRAPPER="$WRAPPER_DIR/politician-stats-cron-wrapper.sh"
 cat > "$CRON_WRAPPER" << EOF
 #!/bin/bash
 
@@ -32,7 +35,7 @@ cat > "$CRON_WRAPPER" << EOF
 # This ensures proper environment is loaded for cron execution
 
 # Set up environment
-export PATH="/usr/local/bin:/usr/bin:/bin:\$PATH"
+export PATH="/usr/local/bin:/usr/bin:/bin:\$HOME/.local/bin:\$PATH"
 export HOME="$HOME"
 export USER="$CRON_USER"
 
@@ -63,10 +66,10 @@ chmod +x "$CRON_WRAPPER"
 CRON_ENTRY="0 20 * * * $CRON_WRAPPER"
 
 # Check if cron job already exists
-if crontab -l 2>/dev/null | grep -q "$CRON_WRAPPER"; then
+if crontab -l 2>/dev/null | grep -q "politician-stats-cron-wrapper.sh"; then
     echo "Cron job already exists. Updating..."
     # Remove existing entry and add new one
-    crontab -l 2>/dev/null | grep -v "$CRON_WRAPPER" | crontab -
+    crontab -l 2>/dev/null | grep -v "politician-stats-cron-wrapper.sh" | crontab -
 fi
 
 # Add new cron job
@@ -75,7 +78,7 @@ echo "Adding cron job to run daily at 20:00 ..."
 
 # Verify cron job was added
 echo "Current cron jobs for user $CRON_USER:"
-crontab -l | grep -E "(update_dashboard|cron_wrapper)" || echo "No matching cron jobs found"
+crontab -l | grep -E "(update_dashboard|politician-stats-cron-wrapper)" || echo "No matching cron jobs found"
 
 # Create systemd user service for additional reliability (optional)
 SYSTEMD_USER_DIR="$HOME/.config/systemd/user"
@@ -130,7 +133,7 @@ else
 fi
 
 # Create startup script to ensure cron is running
-STARTUP_SCRIPT="$SCRIPT_DIR/ensure_cron_on_startup.sh"
+STARTUP_SCRIPT="$HOME/.local/bin/ensure-politician-stats-cron.sh"
 cat > "$STARTUP_SCRIPT" << EOF
 #!/bin/bash
 
@@ -144,7 +147,7 @@ if ! pgrep -x "cron" > /dev/null && ! pgrep -x "crond" > /dev/null; then
 fi
 
 # Verify our cron job exists
-if ! crontab -l 2>/dev/null | grep -q "$CRON_WRAPPER"; then
+if ! crontab -l 2>/dev/null | grep -q "politician-stats-cron-wrapper.sh"; then
     echo "Re-adding politician stats cron job..."
     (crontab -l 2>/dev/null; echo "$CRON_ENTRY") | crontab -
 fi
@@ -158,6 +161,7 @@ echo ""
 echo "=== Setup Complete ==="
 echo "✅ Cron job configured to run daily at 20:00"
 echo "✅ Wrapper script created: $CRON_WRAPPER"
+echo "✅ Startup script created: $STARTUP_SCRIPT"
 echo "✅ Update script: $UPDATE_SCRIPT"
 
 if command -v systemctl >/dev/null 2>&1; then

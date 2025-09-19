@@ -6,7 +6,8 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-STARTUP_SCRIPT="$SCRIPT_DIR/ensure_cron_on_startup.sh"
+PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
+STARTUP_SCRIPT="$HOME/.local/bin/ensure-politician-stats-cron.sh"
 USER_NAME="$(whoami)"
 
 echo "Installing autostart configuration for politician stats update..."
@@ -83,7 +84,7 @@ fi
 REBOOT_CRON_ENTRY="@reboot sleep 60 && $STARTUP_SCRIPT"
 
 # Add @reboot entry if not exists
-if ! crontab -l 2>/dev/null | grep -q "@reboot.*ensure_cron_on_startup"; then
+if ! crontab -l 2>/dev/null | grep -q "@reboot.*ensure-politician-stats-cron"; then
     (crontab -l 2>/dev/null; echo "$REBOOT_CRON_ENTRY") | crontab -
     echo "✅ Added @reboot cron entry"
 else
@@ -114,7 +115,7 @@ else
     echo "❌ Daily update cron job not found"
 fi
 
-if crontab -l 2>/dev/null | grep -q "@reboot.*ensure_cron"; then
+if crontab -l 2>/dev/null | grep -q "@reboot.*ensure-politician-stats-cron"; then
     echo "✅ Reboot cron job exists"
 else
     echo "❌ Reboot cron job not found"
@@ -178,7 +179,7 @@ echo "Installed methods:"
 [ -f "$DESKTOP_FILE" ] && echo "✅ XDG Autostart (desktop)"
 grep -q "Politician Stats Auto-update" "$HOME/.profile" 2>/dev/null && echo "✅ Shell profile"
 systemctl --user is-enabled politician-stats-cron-ensure.service >/dev/null 2>&1 && echo "✅ Systemd user service"
-crontab -l 2>/dev/null | grep -q "@reboot.*ensure_cron" && echo "✅ @reboot cron entry"
+crontab -l 2>/dev/null | grep -q "@reboot.*ensure-politician-stats-cron" && echo "✅ @reboot cron entry"
 
 echo ""
 echo "=== Next Steps ==="
