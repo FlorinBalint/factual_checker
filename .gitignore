@@ -180,3 +180,8 @@ cython_debug/
 scripts/cron_wrapper.sh
 scripts/ensure_cron_on_startup.sh
 scripts/test_setup.sh
+
+# Dashboard backup files
+dashboard/*.backup
+dashboard/*.backup.*
+dashboard/backups/

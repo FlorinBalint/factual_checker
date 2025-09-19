@@ -56,6 +56,23 @@ fi
 # Change to project directory
 cd "$PROJECT_DIR"
 
+# Activate virtual environment
+VENV_PATH="$PROJECT_DIR/.venv"
+if [ -f "\$VENV_PATH/bin/activate" ]; then
+    source "\$VENV_PATH/bin/activate"
+    echo "Activated virtual environment at \$VENV_PATH"
+else
+    echo "ERROR: Virtual environment not found at \$VENV_PATH"
+    exit 1
+fi
+
+# Verify required packages are available
+if ! python3 -c "import pyquery" 2>/dev/null; then
+    echo "ERROR: Required Python packages not available. Please install requirements:"
+    echo "cd $PROJECT_DIR && pip install -r requirements.txt"
+    exit 1
+fi
+
 # Run the update script
 exec "$UPDATE_SCRIPT"
 EOF
@@ -95,7 +112,7 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=$UPDATE_SCRIPT
+ExecStart=$CRON_WRAPPER
 WorkingDirectory=$PROJECT_DIR
 User=$CRON_USER
 Environment=HOME=$HOME

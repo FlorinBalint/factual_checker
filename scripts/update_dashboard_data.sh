@@ -45,8 +45,13 @@ cd "$APP_DIR"
 
 # Backup existing CSV if it exists
 if [ -f "$CSV_FILE" ]; then
-    cp "$CSV_FILE" "$CSV_FILE.backup.$(date +%Y%m%d_%H%M%S)"
-    log "Backed up existing CSV file"
+    # Create backups directory if it doesn't exist
+    BACKUP_DIR="$DASHBOARD_DIR/backups"
+    mkdir -p "$BACKUP_DIR"
+    
+    # Move backup to backups directory
+    cp "$CSV_FILE" "$BACKUP_DIR/politician_stats.csv.backup.$(date +%Y%m%d_%H%M%S)"
+    log "Backed up existing CSV file to backups directory"
 fi
 
 # Generate new stats with error handling
@@ -54,11 +59,14 @@ if python3 main.py --output "../dashboard/politician_stats.csv" --generate_party
     log "Successfully generated new politician stats"
 else
     log "ERROR: Failed to generate politician stats"
-    # Restore backup if generation failed
-    if [ -f "$CSV_FILE.backup.$(date +%Y%m%d_*)" ]; then
-        latest_backup=$(ls -t "$CSV_FILE.backup.$(date +%Y%m%d)"_* | head -n1)
-        cp "$latest_backup" "$CSV_FILE"
-        log "Restored backup CSV file"
+    # Restore backup if generation failed and backup exists
+    BACKUP_DIR="$DASHBOARD_DIR/backups"
+    if [ -d "$BACKUP_DIR" ]; then
+        latest_backup=$(ls -t "$BACKUP_DIR"/politician_stats.csv.backup.* 2>/dev/null | head -n1)
+        if [ -n "$latest_backup" ] && [ -f "$latest_backup" ]; then
+            cp "$latest_backup" "$CSV_FILE"
+            log "Restored backup CSV file: $(basename "$latest_backup")"
+        fi
     fi
     exit 1
 fi
@@ -106,7 +114,7 @@ else
 fi
 
 # Clean up old backups (keep only last 7 days)
-find "$DASHBOARD_DIR" -name "politician_stats.csv.backup.*" -type f -mtime +7 -delete 2>/dev/null || true
+find "$DASHBOARD_DIR/backups" -name "politician_stats.csv.backup.*" -type f -mtime +7 -delete 2>/dev/null || true
 
 # Clean up old logs (keep only last 30 days)
 find "$PROJECT_DIR/logs" -name "update_*.log" -type f -mtime +30 -delete 2>/dev/null || true
