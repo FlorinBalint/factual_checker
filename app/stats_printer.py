@@ -11,7 +11,7 @@ class CsvPrinter:
         writer = csv.writer(file)
         writer.writerow(CsvPrinter.__file_header)
         politician_stats.sort(
-            key=lambda x: (x.credibility, x.total), reverse=True
+            key=lambda x: (x.credibility, x.total, x.name), reverse=True
         )   
         for politician_stat in politician_stats:
           new_row = (politician_stat.name, 
