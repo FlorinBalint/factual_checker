@@ -13,6 +13,10 @@ class PartyExtractor:
   __synonyms = {
     'USR- PLUS': 'USR-PLUS',
     'USR PLUS': 'USR-PLUS',
+    'Reper': 'REPER',
+    'actual PSD': 'PSD',
+    'Pro Romania': 'PRO Romania',
+    'Procuror șef DNA': 'DNA',
     'neafiliat': 'Independent',
     'independent': 'Independent',
     'Neafiliat': 'Independent',
