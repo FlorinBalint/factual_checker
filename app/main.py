@@ -84,12 +84,18 @@ __party_override = {
   'Ana Birchall': 'PSD',
   'Cristian Popescu Piedone': 'PUSL',
   'Anamaria Gavrilă': 'POT',
-  'Ciprian Ciubucu': 'SOS',
+  'Ciprian Ciubuc': 'SOS',
   'Adrian-George Axinia': 'AUR',
   'Dumitru Coarnă': 'AUR',
   'Andrei-Cosmin Gușă': 'AUR',
   'Cătălin Cherecheș': 'PSD',
   'Brian Cristian': 'USR',
+  'Dragoș Pîslaru': 'REPER',
+  'Liviu Iolu': 'REPER',
+  'Ştefan Viorel Florescu': 'PMP',
+  'Andrei Lupu': 'REPER',
+  'Vasilica Miron': 'PNL',
+  'Tudor Ciuhodaru': 'AUR',
 }
 
 class BooleanAction(argparse.Action):
