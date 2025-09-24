@@ -89,6 +89,7 @@ __party_override = {
   'Dumitru Coarnă': 'AUR',
   'Andrei-Cosmin Gușă': 'AUR',
   'Cătălin Cherecheș': 'PSD',
+  'Brian Cristian': 'USR',
 }
 
 class BooleanAction(argparse.Action):

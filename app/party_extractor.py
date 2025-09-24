@@ -15,7 +15,7 @@ class PartyExtractor:
     'USR PLUS': 'USR-PLUS',
     'Reper': 'REPER',
     'actual PSD': 'PSD',
-    'Pro Romania': 'PRO Romania',
+    'Pro România': 'PRO România',
     'Procuror șef DNA': 'DNA',
     'neafiliat': 'Independent',
     'independent': 'Independent',
