@@ -43,7 +43,6 @@ Cristina Trăilă,PNL,https://www.factual.ro/persoane/cristina-traila/,100.0%,1,
 Cristian Preda,Independent,https://www.factual.ro/persoane/cristian-preda/,100.0%,1,0,0,0,0,1
 Cosmin Poteraș,REPER,https://www.factual.ro/persoane/cosmin-poteras/,100.0%,1,0,0,0,0,1
 Ciprian-Constantin Șerban,PSD,https://www.factual.ro/persoane/ciprian-serban/,100.0%,1,0,0,0,0,1
-Bujduveanu Stelian,PNL,https://www.factual.ro/persoane/stelian-bujduveanu/,100.0%,1,0,0,0,0,1
 Brian Cristian,USR,https://www.factual.ro/persoane/brian-cristian/,100.0%,1,0,0,0,0,1
 Bogdan Aurescu,Independent,https://www.factual.ro/persoane/bogdan-aurescu/,100.0%,1,0,0,0,0,1
 Andrei Lupu,REPER,https://www.factual.ro/persoane/andrei-lupu/,100.0%,1,0,0,0,0,1
@@ -152,6 +151,7 @@ Roxana Wring,USR,https://www.factual.ro/persoane/roxana-wring/,50.0%,2,0,1,0,0,1
 Mirela Elena Adomnicăi,PSD,https://www.factual.ro/persoane/mirela-adomnicai/,50.0%,2,0,0,1,1,0
 Ionuț Stroe,PNL,https://www.factual.ro/persoane/ionut-stroe/,50.0%,2,0,1,0,0,1
 George Șișcu,PNL,https://www.factual.ro/persoane/george-siscu/,50.0%,2,0,1,0,0,1
+Bujduveanu Stelian,PNL,https://www.factual.ro/persoane/stelian-bujduveanu/,50.0%,2,0,1,0,0,1
 Angel Tîlvăr,PSD,https://www.factual.ro/persoane/angel-tilvar/,50.0%,2,0,1,0,0,1
 Mihai Fifor,PSD,https://www.factual.ro/persoane/mihai-fifor/,47.92%,12,0,3,4,1,4
 Carmen Avram,PSD,https://www.factual.ro/persoane/carmen-avram/,46.43%,7,0,2,2,1,2
@@ -219,11 +219,11 @@ Nigel Farage,UKIP,https://www.factual.ro/persoane/nigel-farage-despre-politicile
 Nicuşor Halici,PSD,https://www.factual.ro/persoane/nicusor-halici/,25.0%,1,0,0,1,0,0
 Nicolae Bănicoiu,PSD,https://www.factual.ro/persoane/nicolae-banicoiu/,25.0%,1,0,0,1,0,0
 Natalia-Roxana Pațurcă,PSD,https://www.factual.ro/persoane/roxana-natalia-paturca/,25.0%,1,0,0,1,0,0
-Mihail Neamțu,AUR,https://www.factual.ro/persoane/mihail-neamtu/,25.0%,1,0,0,1,0,0
 Mihai Weber,PSD,https://www.factual.ro/persoane/mihai-weber/,25.0%,1,0,0,1,0,0
 Luis Lazarus,SOS,https://www.factual.ro/persoane/luis-lazarus/,25.0%,1,0,0,1,0,0
 Laura Fulgeanu-Moagher,PSD,https://www.factual.ro/persoane/laura-fulgeanu-moagher/,25.0%,1,0,0,1,0,0
 Iulian Iancu,PSD,https://www.factual.ro/persoane/iulian-iancu/,25.0%,1,0,0,1,0,0
+Ionuț Florin Pucheanu,vicepreședinte PSD,https://www.factual.ro/persoane/ionut-florin-pucheanu/,25.0%,1,0,0,1,0,0
 Gheorghe Șoldan,PSD,https://www.factual.ro/persoane/gheorghe-soldan/,25.0%,1,0,0,1,0,0
 Gheorghe Falcă,PNL,https://www.factual.ro/persoane/gheorghe-falca/,25.0%,1,0,0,1,0,0
 Călin Matieș,PSD,https://www.factual.ro/persoane/calin-maties/,25.0%,1,0,0,1,0,0
@@ -236,10 +236,10 @@ Ben-Oni Ardelean,PNL,https://www.factual.ro/persoane/ben-oni-ardelean/,25.0%,1,0
 Alexandru Florin Rogobete,PSD,https://www.factual.ro/persoane/alexandru-rogobete/,25.0%,1,0,0,1,0,0
 Adriean Videanu,PNL,https://www.factual.ro/persoane/adriean-videanu/,25.0%,1,0,0,1,0,0
 AUR (Alianța pentru Unirea Românilor),AUR,https://www.factual.ro/persoane/aur-alianta-pentru-unirea-romanilor/,25.0%,1,0,0,1,0,0
-Sorin Cîmpeanu,PNL,https://www.factual.ro/persoane/sorin-cimpeanu/,21.88%,8,0,5,1,2,0
 Florin Iordache,PSD,https://www.factual.ro/persoane/florin-iordache/,21.88%,8,0,4,3,0,1
 Lia Olguța Vasilescu,PSD,https://www.factual.ro/persoane/lia-olguta-vasilescu/,20.83%,24,0,10,11,3,0
 Gabriel Mutu,PSD,https://www.factual.ro/persoane/gabriel-mutu/,20.83%,6,0,4,1,0,1
+Sorin Cîmpeanu,PNL,https://www.factual.ro/persoane/sorin-cimpeanu/,19.44%,9,0,6,1,2,0
 Vasile Dîncu,PSD,https://www.factual.ro/persoane/vasile-dancu/,18.75%,4,0,3,0,1,0
 Cătălin Rădulescu,PER,https://www.factual.ro/persoane/catalin-radulescu/,18.75%,4,0,3,0,1,0
 Daniel-Cătălin Zamfir,PSD,https://www.factual.ro/persoane/daniel-catalin-zamfir/,16.67%,6,0,2,4,0,0
@@ -254,6 +254,7 @@ Sorin Oprescu,Independent,https://www.factual.ro/persoane/sorin-oprescu/,12.5%,2
 Raluca Prună,Independent,https://www.factual.ro/persoane/raluca-pruna/,12.5%,2,0,1,1,0,0
 Partidul Social Democrat,PSD,https://www.factual.ro/persoane/psd/,12.5%,2,0,1,1,0,0
 Mugur Cozmanciuc,PNL,https://www.factual.ro/persoane/mugur-cozmanciuc/,12.5%,2,0,1,1,0,0
+Mihail Neamțu,AUR,https://www.factual.ro/persoane/mihail-neamtu/,12.5%,2,0,1,1,0,0
 Ilie Sârbu,PSD,https://www.factual.ro/persoane/ilie-sarbu/,12.5%,2,0,1,1,0,0
 Gabriela Zoană,PSD,https://www.factual.ro/persoane/gabriela-zoana/,12.5%,2,0,1,1,0,0
 Emilian Pavel,PSD,https://www.factual.ro/persoane/emilian-pavel/,12.5%,2,0,1,1,0,0
@@ -275,8 +276,8 @@ Mihai Lasca,AUR,https://www.factual.ro/persoane/mihai-lasca/,2.78%,9,0,8,1,0,0
 Anamaria Gavrilă,POT,https://www.factual.ro/persoane/anamaria-gavrila/,2.78%,9,0,8,1,0,0
 Diana Iovanovici-Șoșoacă,SOS,https://www.factual.ro/persoane/diana-iovanovici-sosoaca/,1.19%,21,0,20,1,0,0
 Alin Coleșa,AUR,https://www.factual.ro/persoane/alin-colesa/,0.0%,5,0,5,0,0,0
+Ramona Ioana Bruynseels,AUR,https://www.factual.ro/persoane/ramona-ioana-bruynseels/,0.0%,4,1,3,0,0,0
 Șerban Nicolae,PSD,https://www.factual.ro/persoane/serban-nicolae/,0.0%,3,0,3,0,0,0
-Ramona Ioana Bruynseels,AUR,https://www.factual.ro/persoane/ramona-ioana-bruynseels/,0.0%,3,1,2,0,0,0
 Radu Mazăre,PSD,https://www.factual.ro/persoane/radu-mazare/,0.0%,3,0,3,0,0,0
 Gianina Șerban,AUR,https://www.factual.ro/persoane/gianina-serban/,0.0%,3,0,3,0,0,0
 Gabriel Zetea,PSD,https://www.factual.ro/persoane/gabriel-zetea/,0.0%,3,0,3,0,0,0
