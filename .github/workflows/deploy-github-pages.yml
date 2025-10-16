@@ -47,6 +47,11 @@ jobs:
             html-minifier-terser --collapse-whitespace --remove-comments --minify-css true --minify-js true --preserve-line-breaks --keep-closing-slash --case-sensitive "$1" -o "_site/$(basename "$1")"
           ' _ {} \;
           
+          # Ensure index.html exists and points to political_dashboard.html
+          if [ ! -f "_site/index.html" ]; then
+            cp "_site/political_dashboard.html" "_site/index.html"
+          fi
+          
           # Copy and minify CSS files directly to root
           find dashboard -name "*.css" -exec sh -c '
             csso "$1" --output "_site/$(basename "$1")"
