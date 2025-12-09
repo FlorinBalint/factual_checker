@@ -1,10 +1,390 @@
 Nume,Afiliere,Pagina,Credibilitate,Număr declarații,Imposibil de verificat,False,Trunchiate,Parțial adevărate,Adevărate
-Rareș Lazăr,Independent,https://www.factual.ro/persoane/rares-lazar/,100.0%,2,0,0,0,0,2
-Eduard Koler,Independent,https://www.factual.ro/persoane/eduard-koler/,50.0%,4,0,2,0,0,2
-Ciprian Paraschiv,Independent,https://www.factual.ro/persoane/ciprian-paraschiv/,50.0%,4,0,0,2,2,0
-Anca Alexandrescu,Independent,https://www.factual.ro/persoane/anca-alexandrescu/,15.62%,16,0,6,10,0,0
-Angela Negrotă,Independent,https://www.factual.ro/persoane/angela-negrota/,0.0%,4,0,4,0,0,0
-Veronica Grosu,Independent,https://www.factual.ro/persoane/veronica-grosu/,0.0%,2,0,2,0,0,0
-Ovidiu Jitaru,Independent,https://www.factual.ro/persoane/ovidiu-jitaru/,0.0%,2,0,2,0,0,0
-Georgiana Teodorescu,Independent,https://www.factual.ro/persoane/georgiana-teodorescu/,0.0%,2,0,2,0,0,0
-Aurora Tasica Simu,Independent,https://www.factual.ro/persoane/aurora-tasica-simu/,0.0%,2,0,2,0,0,0
+Vlad Alexandrescu,Independent,https://www.factual.ro/persoane/vlad-alexandrescu/,100.0%,6,0,0,0,0,6
+Stelian Ion,USR,https://www.factual.ro/persoane/stelian-ion/,100.0%,6,0,0,0,0,6
+Emilian Pavel,Independent,https://www.factual.ro/persoane/emilian-pavel/,100.0%,6,0,0,0,0,6
+Rareș Bogdan,Independent,https://www.factual.ro/persoane/rares-bogdan/,100.0%,2,1,0,0,0,1
+Lilian Scripnic,Independent,https://www.factual.ro/persoane/lilian-scripnic/,100.0%,2,0,0,0,0,2
+Kelemen Hunor,Independent,https://www.factual.ro/persoane/kelemen-hunor/,100.0%,2,1,0,0,0,1
+Dănuţ Bica,Independent,https://www.factual.ro/persoane/danut-bica/,100.0%,2,1,0,0,0,1
+Cristian Seidler,Independent,https://www.factual.ro/persoane/cristian-seidler/,100.0%,2,0,0,0,0,2
+Alexandru Kocsis-Cristea,Independent,https://www.factual.ro/persoane/alexandru-kocsis-cristea/,100.0%,2,0,0,0,0,2
+Vasile Dîncu,PSD,https://www.factual.ro/persoane/vasile-dancu/,100.0%,1,0,0,0,0,1
+Tudor Ciuhodaru,AUR,https://www.factual.ro/persoane/tudor-ciuhodaru/,100.0%,1,0,0,0,0,1
+Teodor Meleșcanu,Independent,https://www.factual.ro/persoane/teodor-melescanu/,100.0%,1,0,0,0,0,1
+Sevil Shhaideh,Independent,https://www.factual.ro/persoane/sevil-shhaideh/,100.0%,1,0,0,0,0,1
+Rovana Plumb,Independent,https://www.factual.ro/persoane/rovana-plumb/,100.0%,1,0,0,0,0,1
+Robert Sighiartău,Independent,https://www.factual.ro/persoane/robert-sighiartau/,100.0%,1,0,0,0,0,1
+Rareș Lazăr,Independent,https://www.factual.ro/persoane/rares-lazar/,100.0%,1,0,0,0,0,1
+Radu Maxim,Independent,https://www.factual.ro/persoane/radu-maxim/,100.0%,1,0,0,0,0,1
+Paul Gheorghe,PSD,https://www.factual.ro/persoane/paul-gheorghe/,100.0%,1,0,0,0,0,1
+Octavian Berceanu,REPER,https://www.factual.ro/persoane/octavian-berceanu/,100.0%,1,0,0,0,0,1
+Oana Țoiu,Independent,https://www.factual.ro/persoane/oana-toiu/,100.0%,1,0,0,0,0,1
+Nicolae Georgescu,Independent,https://www.factual.ro/persoane/nicolae-georgescu/,100.0%,1,0,0,0,0,1
+Mugur Isărescu,Independent,https://www.factual.ro/persoane/mugur-isarescu/,100.0%,1,0,0,0,0,1
+Moise Guran,Independent,https://www.factual.ro/persoane/moise-guran/,100.0%,1,0,0,0,0,1
+Mircea Dobre,Independent,https://www.factual.ro/persoane/mircea-dobre/,100.0%,1,0,0,0,0,1
+Mircea Diaconu,Independent,https://www.factual.ro/persoane/mircea-diaconu/,100.0%,1,0,0,0,0,1
+Mihail Neamțu,Independent,https://www.factual.ro/persoane/mihail-neamtu/,100.0%,1,0,0,0,0,1
+Mihai Toader,Independent,https://www.factual.ro/persoane/mihai-toader/,100.0%,1,0,0,0,0,1
+Mihai Daneş,Independent,https://www.factual.ro/persoane/mihai-danes/,100.0%,1,0,0,0,0,1
+Marko Bela,Independent,https://www.factual.ro/persoane/marko-bela/,100.0%,1,0,0,0,0,1
+Marian Oprișan,Independent,https://www.factual.ro/persoane/marian-oprisan/,100.0%,1,0,0,0,0,1
+Mara Calista,Independent,https://www.factual.ro/persoane/mara-calista/,100.0%,1,0,0,0,0,1
+Joachim Zeller,Independent,https://www.factual.ro/persoane/joachim-zeller/,100.0%,1,0,0,0,0,1
+Grațiela Gavrilescu,Independent,https://www.factual.ro/persoane/gratiela-gavrilescu/,100.0%,1,0,0,0,0,1
+George Simion,Independent,https://www.factual.ro/persoane/george-simion/,100.0%,1,0,0,0,0,1
+Gabriela Szabo,PSD,https://www.factual.ro/persoane/gabriela-szabo/,100.0%,1,0,0,0,0,1
+Gabriela Podașcă,Independent,https://www.factual.ro/persoane/gabriela-podasca/,100.0%,1,0,0,0,0,1
+Florica Cherecheș,Independent,https://www.factual.ro/persoane/florica-chereches/,100.0%,1,0,0,0,0,1
+Emanuel Ungureanu,USR,https://www.factual.ro/persoane/emanuel-ungureanu/,100.0%,1,0,0,0,0,1
+Eduard Hellvig,Independent,https://www.factual.ro/persoane/eduard-hellvig/,100.0%,1,0,0,0,0,1
+Dominic Fritz,Independent,https://www.factual.ro/persoane/dominic-samuel-fritz/,100.0%,1,0,0,0,0,1
+Daniel Florea,Independent,https://www.factual.ro/persoane/daniel-florea/,100.0%,1,0,0,0,0,1
+Dan Costescu,Independent,https://www.factual.ro/persoane/dan-costescu/,100.0%,1,0,0,0,0,1
+Dan Barna,Independent,https://www.factual.ro/persoane/dan-barna/,100.0%,1,0,0,0,0,1
+Călin Matieș,Independent,https://www.factual.ro/persoane/calin-maties/,100.0%,1,0,0,0,0,1
+Cristina Trăilă,Independent,https://www.factual.ro/persoane/cristina-traila/,100.0%,1,0,0,0,0,1
+Cristina Palmer,Independent,https://www.factual.ro/persoane/cristina-palmer/,100.0%,1,0,0,0,0,1
+Cristian Pârvulescu,Independent,https://www.factual.ro/persoane/cristian-parvulescu/,100.0%,1,0,0,0,0,1
+Cristian Ghinea,Independent,https://www.factual.ro/persoane/cristian-ghinea/,100.0%,1,0,0,0,0,1
+Corneliu Buicu,Independent,https://www.factual.ro/persoane/corneliu-buicu-2/,100.0%,1,0,0,0,0,1
+Corina Șuteu,Independent,https://www.factual.ro/persoane/corina-suteu/,100.0%,1,0,0,0,0,1
+Ben-Oni Ardelean,Independent,https://www.factual.ro/persoane/ben-oni-ardelean/,100.0%,1,0,0,0,0,1
+Andreea Paul,Independent,https://www.factual.ro/persoane/andreea-paul/,100.0%,1,0,0,0,0,1
+Ana Costea,Independent,https://www.factual.ro/persoane/ana-costea/,100.0%,1,0,0,0,0,1
+Adrian Ioan-Veștea,Independent,https://www.factual.ro/persoane/adrian-ioan-vestea/,100.0%,1,0,0,0,0,1
+Adrian Dohotaru,PV,https://www.factual.ro/persoane/adrian-dohotaru/,100.0%,1,0,0,0,0,1
+Ramona Strugariu,Independent,https://www.factual.ro/persoane/ramona-strugariu/,91.67%,3,0,0,0,1,2
+Cosette Chichirău,Independent,https://www.factual.ro/persoane/cosette-chichirau/,91.67%,3,0,0,0,1,2
+Andrei Caramitru,Independent,https://www.factual.ro/persoane/andrei-caramitru/,91.67%,3,0,0,0,1,2
+Șerban Nicolae,Independent,https://www.factual.ro/persoane/serban-nicolae/,90.0%,5,0,0,0,2,3
+Traian Băsescu,Independent,https://www.factual.ro/persoane/traian-basescu/,90.0%,5,0,0,0,2,3
+Daniel Constantin,Independent,https://www.factual.ro/persoane/daniel-constantin/,90.0%,5,0,0,0,2,3
+Cătălin Predoiu,Independent,https://www.factual.ro/persoane/catalin-predoiu/,87.5%,4,0,0,0,2,2
+Alexandru Nazare,Independent,https://www.factual.ro/persoane/alexandru-nazare/,87.5%,4,0,0,0,2,2
+Victoria Stoiciu,Independent,https://www.factual.ro/persoane/victoria-stoiciu/,87.5%,2,0,0,0,1,1
+Mirela Adomnicăi,Independent,https://www.factual.ro/persoane/mirela-adomnicai/,87.5%,2,0,0,0,1,1
+Mircia Chelaru,Independent,https://www.factual.ro/persoane/mircia-chelaru/,87.5%,2,0,0,0,1,1
+Laura Georgescu,Independent,https://www.factual.ro/persoane/laura-georgescu/,87.5%,2,0,0,0,1,1
+Cătălin Teniţă,Independent,https://www.factual.ro/persoane/catalin-tenita/,87.5%,2,0,0,0,1,1
+Christine Thellmann,Independent,https://www.factual.ro/persoane/christine-thellmann/,87.5%,2,0,0,0,1,1
+Andrei-Cosmin Gușă,AUR,https://www.factual.ro/persoane/andrei-cosmin-gusa/,87.5%,2,0,0,0,1,1
+Alin Mituța,Independent,https://www.factual.ro/persoane/alin-mituta/,87.5%,2,0,0,0,1,1
+Adrian Streinu Cercel,Independent,https://www.factual.ro/persoane/streinu-cercel/,87.5%,2,0,0,0,1,1
+Iulian Bulai,Independent,https://www.factual.ro/persoane/iulian-bulai/,75.0%,4,0,1,0,0,3
+Gigel Știrbu,Independent,https://www.factual.ro/persoane/gigel-stirbu/,75.0%,4,0,1,0,0,3
+Dragoș Pîslaru,REPER,https://www.factual.ro/persoane/dragos-pislaru/,75.0%,4,0,1,0,0,3
+Virgil Popescu,Independent,https://www.factual.ro/persoane/virgil-popescu/,75.0%,3,0,0,1,0,2
+Mihaela Huncă,Independent,https://www.factual.ro/persoane/mihaela-hunca/,75.0%,3,0,0,1,0,2
+Marcel Ciolacu,PSD,https://www.factual.ro/persoane/marcel-ciolacu/,75.0%,3,0,0,1,0,2
+Vlad Gheorghe,Independent,https://www.factual.ro/persoane/vlad-gheorghe/,75.0%,1,0,0,0,1,0
+Vlad Bontea,Independent,https://www.factual.ro/persoane/vlad-bontea/,75.0%,1,0,0,0,1,0
+Viorica Dăncilă,Independent,https://www.factual.ro/persoane/viorica-dancila/,75.0%,1,0,0,0,1,0
+Viorel Hrebenciuc,Independent,https://www.factual.ro/persoane/viorel-hrebenciuc/,75.0%,1,0,0,0,1,0
+USR PLUS,Independent,https://www.factual.ro/persoane/usr-2/,75.0%,1,0,0,0,1,0
+Traian Berbeceanu,Independent,https://www.factual.ro/persoane/traian-berbeceanu/,75.0%,1,0,0,0,1,0
+Tit-Liviu Brăiloiu,Independent,https://www.factual.ro/persoane/tit-liviu-brailoiu/,75.0%,1,0,0,0,1,0
+Tamara Ciofu,Independent,https://www.factual.ro/persoane/tamara-ciofu/,75.0%,1,0,0,0,1,0
+Simona Bucura Oprescu,Independent,https://www.factual.ro/persoane/simona-bucura-oprescu/,75.0%,1,0,0,0,1,0
+Radu Molnar,Independent,https://www.factual.ro/persoane/radu-molnar/,75.0%,1,0,0,0,1,0
+PNL,PNL,https://www.factual.ro/persoane/pnl/,75.0%,1,0,0,0,1,0
+Nicolae Giugea,Independent,https://www.factual.ro/persoane/nicolae-giugea/,75.0%,1,0,0,0,1,0
+Nicolae Ciucă,Independent,https://www.factual.ro/persoane/nicolae-ciuca/,75.0%,1,0,0,0,1,0
+Mirela Furtună,Independent,https://www.factual.ro/persoane/mirela-furtuna/,75.0%,1,0,0,0,1,0
+Mihai Lasca,AUR,https://www.factual.ro/persoane/mihai-lasca/,75.0%,1,0,0,0,1,0
+Marius Budăi,Independent,https://www.factual.ro/persoane/marius-budai/,75.0%,1,0,0,0,1,0
+Liviu Plesoianu,Independent,https://www.factual.ro/persoane/liviu-plesoianu/,75.0%,1,0,0,0,1,0
+Irineu Darău,Independent,https://www.factual.ro/persoane/irineu-darau/,75.0%,1,0,0,0,1,0
+Ionuț Vulpescu,Independent,https://www.factual.ro/persoane/ionut-vulpescu/,75.0%,1,0,0,0,1,0
+Ionel Dancă,Independent,https://www.factual.ro/persoane/ionel-danca/,75.0%,1,0,0,0,1,0
+Ioana Mihăilă,REPER,https://www.factual.ro/persoane/ioana-mihaila/,75.0%,1,0,0,0,1,0
+Ioana Bran,Independent,https://www.factual.ro/persoane/ioana-bran/,75.0%,1,0,0,0,1,0
+Ioan Mang,Independent,https://www.factual.ro/persoane/ioan-mang/,75.0%,1,0,0,0,1,0
+Ileana Cristina Dumitrache,Independent,https://www.factual.ro/persoane/ileana-cristina-dumitrache/,75.0%,1,0,0,0,1,0
+Gianina Șerban,Independent,https://www.factual.ro/persoane/gianina-serban/,75.0%,1,0,0,0,1,0
+Gabriel Zetea,Independent,https://www.factual.ro/persoane/gabriel-zetea/,75.0%,1,0,0,0,1,0
+Eugen Țapu-Nazăre,Independent,https://www.factual.ro/persoane/eugen-tapu-nazare/,75.0%,1,0,0,0,1,0
+Eugen Nicolicea,Independent,https://www.factual.ro/persoane/eugen-nicolicea/,75.0%,1,0,0,0,1,0
+Elena Udrea,PMP,https://www.factual.ro/persoane/elena-udrea/,75.0%,1,0,0,0,1,0
+Elena Băsescu,Independent,https://www.factual.ro/persoane/elena-basescu/,75.0%,1,0,0,0,1,0
+Diana Stoica,Independent,https://www.factual.ro/persoane/diana-stoica/,75.0%,1,0,0,0,1,0
+Daniel-Cătălin Zamfir,Independent,https://www.factual.ro/persoane/daniel-catalin-zamfir/,75.0%,1,0,0,0,1,0
+Cosmin Poteraș,Independent,https://www.factual.ro/persoane/cosmin-poteras/,75.0%,1,0,0,0,1,0
+Corneliu Buicu,Independent,https://www.factual.ro/persoane/corneliu-buicu/,75.0%,1,0,0,0,1,0
+Constantin Toma,Independent,https://www.factual.ro/persoane/constantin-toma/,75.0%,1,0,0,0,1,0
+Bogdan Oprea,Independent,https://www.factual.ro/persoane/bogdan-oprea/,75.0%,1,0,0,0,1,0
+Anton Anton,ALDE,https://www.factual.ro/persoane/anton-anton/,75.0%,1,0,0,0,1,0
+Andrei Lupu,REPER,https://www.factual.ro/persoane/andrei-lupu/,75.0%,1,0,0,0,1,0
+Alexandra Pacuraru,Independent,https://www.factual.ro/persoane/alexandra-pacuraru/,75.0%,1,0,0,0,1,0
+Adrian Moraru,Independent,https://www.factual.ro/persoane/adrian-moraru/,75.0%,1,0,0,0,1,0
+Adrian Mocanu,Independent,https://www.factual.ro/persoane/adrian-mocanu/,75.0%,1,0,0,0,1,0
+Radu Miruță,Independent,https://www.factual.ro/persoane/9285/,68.75%,4,0,0,1,2,1
+Florin Spătaru,Independent,https://www.factual.ro/persoane/florin-spataru/,68.75%,4,0,0,1,2,1
+Bogdan Ivan,Independent,https://www.factual.ro/persoane/bogdan-ivan/,68.75%,4,0,0,1,2,1
+Răzvan Ilie Rotaru,Independent,https://www.factual.ro/persoane/razvan-ilie-rotaru/,66.67%,3,0,0,1,1,1
+Roxana Wring,Independent,https://www.factual.ro/persoane/roxana-wring/,66.67%,3,0,0,1,1,1
+Radu Mihail,USR,https://www.factual.ro/persoane/radu-mihail/,66.67%,3,0,0,1,1,1
+Mihai Chirică,Independent,https://www.factual.ro/persoane/mihai-chirica/,66.67%,3,0,0,1,1,1
+Marcel Vela,PNL,https://www.factual.ro/persoane/marcel-vela/,66.67%,3,0,1,0,0,2
+Dumitru Oprea,Independent,https://www.factual.ro/persoane/dumitru-oprea/,66.67%,3,0,1,0,0,2
+Daniel Buda,Independent,https://www.factual.ro/persoane/daniel-buda/,66.67%,3,0,0,1,1,1
+Cristina Iurișniți,Independent,https://www.factual.ro/persoane/cristina-iurisniti/,66.67%,3,0,1,0,0,2
+Cristina Burciu,Independent,https://www.factual.ro/persoane/cristina-burciu/,66.67%,3,0,0,1,1,1
+Cristian Bușoi,Independent,https://www.factual.ro/persoane/cristian-busoi/,66.67%,3,0,0,1,1,1
+Codrin Ștefănescu,Independent,https://www.factual.ro/persoane/codrin-stefanescu/,66.67%,3,0,0,1,1,1
+Alfred Simonis,Independent,https://www.factual.ro/persoane/alfred-simonis/,66.67%,3,0,0,1,1,1
+Adrian Wiener,Independent,https://www.factual.ro/persoane/adrian-wiener/,66.67%,3,0,0,1,1,1
+Adrian Oros,Independent,https://www.factual.ro/persoane/adrian-oros/,66.67%,3,0,0,1,1,1
+Adrian Ionuț Chesnoiu,Independent,https://www.factual.ro/persoane/adrian-ionut-chesnoiu/,66.67%,3,0,0,1,1,1
+Victor Negrescu,Independent,https://www.factual.ro/persoane/victor-negrescu/,65.0%,5,0,0,2,1,2
+Sorinel-Marian Vrăjitoru,Independent,https://www.factual.ro/persoane/sorinel-marian-vrajitoru/,65.0%,5,0,0,2,1,2
+Bogdan Rodeanu,Independent,https://www.factual.ro/persoane/bogdan-rodeanu/,65.0%,5,0,0,2,1,2
+Silviu Dehelean,Independent,https://www.factual.ro/persoane/silviu-dehelean/,62.5%,2,0,0,1,0,1
+Laura-Iuliana Scântei,Independent,https://www.factual.ro/persoane/laura-iuliana-scantei/,62.5%,2,0,0,1,0,1
+Hilde Brandl,Independent,https://www.factual.ro/persoane/hilde-brandl/,62.5%,2,0,0,1,0,1
+Vlad Voiculescu,USR,https://www.factual.ro/persoane/vlad-voiculescu/,58.82%,18,1,3,4,4,6
+Varujan Vosganian,Independent,https://www.factual.ro/persoane/varujan-vosganian/,57.14%,8,1,3,0,0,4
+Petre Florin Manole,Independent,https://www.factual.ro/persoane/petre-florin-manole/,57.14%,8,1,3,0,0,4
+Lucian Șova,Independent,https://www.factual.ro/persoane/lucian-sova/,57.14%,8,1,3,0,0,4
+Cristian Buican,Independent,https://www.factual.ro/persoane/cristian-buican/,54.17%,18,0,5,3,4,6
+Mircea Fechet,Independent,https://www.factual.ro/persoane/mircea-fechet/,50.0%,7,0,2,2,0,3
+Elena Lasconi,Independent,https://www.factual.ro/persoane/elena-lasconi/,50.0%,7,0,2,2,0,3
+Denisa Neagu,Independent,https://www.factual.ro/persoane/denisa-neagu/,50.0%,7,0,2,2,0,3
+Ştefan Viorel Florescu,PMP,https://www.factual.ro/persoane/stefan-viorel-florescu/,50.0%,4,0,2,0,0,2
+Vasilica Miron,PNL,https://www.factual.ro/persoane/vasilica-miron/,50.0%,4,0,2,0,0,2
+Ovidiu Raețchi,Independent,https://www.factual.ro/persoane/ovidiu-raetchi/,50.0%,4,0,2,0,0,2
+Ovidiu Jitaru,Independent,https://www.factual.ro/persoane/ovidiu-jitaru/,50.0%,3,0,0,2,0,1
+Crin Antonescu,PNL,https://www.factual.ro/persoane/crin-antonescu/,50.0%,3,0,0,2,0,1
+Alexandru Rogobete,Independent,https://www.factual.ro/persoane/alexandru-rogobete/,50.0%,3,0,0,2,0,1
+Viorel Ştefan,Independent,https://www.factual.ro/persoane/viorel-stefan/,50.0%,2,0,1,0,0,1
+Valentin Popa,PSD,https://www.factual.ro/persoane/valentin-popa/,50.0%,2,0,0,1,1,0
+Sebastian Burduja,Independent,https://www.factual.ro/persoane/sebastian-burduja/,50.0%,2,0,1,0,0,1
+Rodica Boancă,Independent,https://www.factual.ro/persoane/rodica-boanca/,50.0%,2,0,0,1,1,0
+Nicu Fălcoi,Independent,https://www.factual.ro/persoane/nicu-falcoi/,50.0%,2,0,0,1,1,0
+Mara Mareș,Independent,https://www.factual.ro/persoane/mara-mares/,50.0%,2,0,1,0,0,1
+Ioan Cupșa,PNL,https://www.factual.ro/persoane/ioan-cupsa/,50.0%,2,0,0,1,1,0
+Gheorghe Falcă,Independent,https://www.factual.ro/persoane/gheorghe-falca/,50.0%,2,0,0,1,1,0
+George Șișcu,Independent,https://www.factual.ro/persoane/george-siscu/,50.0%,2,0,1,0,0,1
+Cezar Preda,Independent,https://www.factual.ro/persoane/cezar-preda/,50.0%,2,0,1,0,0,1
+Brigitte Clotilde Armand,USR,https://www.factual.ro/persoane/brigitte-clotilde-armand/,50.0%,2,0,1,0,0,1
+Anamaria Gavrilă,POT,https://www.factual.ro/persoane/anamaria-gavrila/,50.0%,2,0,0,1,1,0
+Victor Ponta,Independent,https://www.factual.ro/persoane/victor-ponta/,49.54%,54,0,15,13,10,16
+Nicușor Dan,USR,https://www.factual.ro/persoane/nicusor-dan/,49.54%,54,0,15,13,10,16
+Ionuț Mișa,PSD,https://www.factual.ro/persoane/ionut-misa/,48.15%,54,0,15,13,13,13
+Doina Gradea,Independent,https://www.factual.ro/persoane/doina-gradea/,48.08%,15,2,3,4,3,3
+Ciprian Ciucu,PNL,https://www.factual.ro/persoane/ciprian-ciucu/,47.22%,18,0,3,7,5,3
+Mihai Fifor,Independent,https://www.factual.ro/persoane/mihai-fifor/,46.43%,7,0,2,2,1,2
+Carmen Avram,Independent,https://www.factual.ro/persoane/carmen-avram/,46.43%,7,0,2,2,1,2
+Sorin Muncaciu,Independent,https://www.factual.ro/persoane/sorin_muncaciu/,41.67%,3,0,1,1,0,1
+Dan Motreanu,Independent,https://www.factual.ro/persoane/dan-motreanu/,41.67%,3,0,1,1,0,1
+Brian Cristian,USR,https://www.factual.ro/persoane/brian-cristian/,41.67%,3,0,1,1,0,1
+Maria Grapini,Independent,https://www.factual.ro/persoane/maria-grapini/,41.2%,54,0,18,15,10,11
+Theodor Paleologu,Independent,https://www.factual.ro/persoane/theodor-paleologu/,39.29%,7,0,3,1,2,1
+Lucian Romascanu,Independent,https://www.factual.ro/persoane/lucian-romascanu/,39.29%,7,0,3,1,2,1
+Lucian Bode,Independent,https://www.factual.ro/persoane/lucian-bode/,39.29%,7,0,3,1,2,1
+Ștefan Radu Oprea,Independent,https://www.factual.ro/persoane/stefan-radu-oprea/,38.89%,18,0,5,6,6,1
+Renate Weber,Independent,https://www.factual.ro/persoane/renate-weber/,34.72%,18,0,6,7,2,3
+Niculae Bădălău,Independent,https://www.factual.ro/persoane/niculae-badalau/,34.72%,18,0,8,4,3,3
+Alina Gorghiu,PNL,https://www.factual.ro/persoane/alina-gorghiu/,31.48%,27,0,12,7,5,3
+Mihai Tudose,Independent,https://www.factual.ro/persoane/mihai-tudose/,25.0%,8,0,6,0,0,2
+Lia Olguța Vasilescu,Independent,https://www.factual.ro/persoane/lia-olguta-vasilescu/,25.0%,8,0,6,0,0,2
+Florin Cîțu,Independent,https://www.factual.ro/persoane/florin-citu/,25.0%,8,0,6,0,0,2
+Alin Coleșa,Independent,https://www.factual.ro/persoane/alin-colesa/,25.0%,8,0,5,1,1,1
+Adrian Câciu,Independent,https://www.factual.ro/persoane/adrian-caciu/,25.0%,8,0,5,1,1,1
+AUR (Alianţa pentru Unirea Românilor),Independent,https://www.factual.ro/persoane/aur-alianta-pentru-unirea-romanilor/,25.0%,8,0,5,1,1,1
+Sorin Cîmpeanu,Independent,https://www.factual.ro/persoane/sorin-cimpeanu/,25.0%,6,0,4,0,2,0
+Mircea Duşa,Independent,https://www.factual.ro/persoane/mircea-dusa/,25.0%,6,0,4,0,2,0
+Laura Chiriac,Independent,https://www.factual.ro/persoane/laura-chiriac/,25.0%,6,0,4,0,2,0
+Viorica Sandu,Independent,https://www.factual.ro/persoane/viorica-sandu/,25.0%,3,1,0,2,0,0
+Silviu Nicu Macovei,Independent,https://www.factual.ro/persoane/silviu-nicu-macovei/,25.0%,3,1,0,2,0,0
+Siegfried Mureșan,Independent,https://www.factual.ro/persoane/siegfried-muresan/,25.0%,3,0,2,0,1,0
+Norica Nicolai,Independent,https://www.factual.ro/persoane/norica-nicolai/,25.0%,3,0,2,0,1,0
+Gheorghe Șimon,Independent,https://www.factual.ro/persoane/gheorghe-simon/,25.0%,3,1,0,2,0,0
+Florin Roman,Independent,https://www.factual.ro/persoane/florin-roman/,25.0%,3,0,2,0,1,0
+Ecaterina Andronescu,PSD,https://www.factual.ro/persoane/ecaterina-andronescu/,25.0%,3,0,2,0,1,0
+Claudiu Năsui,Independent,https://www.factual.ro/persoane/claudiu-nasui/,25.0%,3,0,2,0,1,0
+Carmen Dan,Independent,https://www.factual.ro/persoane/carmen-dan/,25.0%,3,0,2,0,1,0
+Victor Costache,PNL,https://www.factual.ro/persoane/victor-costache/,25.0%,2,0,0,2,0,0
+Vasilică Toma,Independent,https://www.factual.ro/persoane/vasilica-toma/,25.0%,2,0,0,2,0,0
+Dan Vîlceanu,Independent,https://www.factual.ro/persoane/dan-vilceanu/,25.0%,2,0,0,2,0,0
+Cristina Elena Dinu,Independent,https://www.factual.ro/persoane/cristina-elena-dinu/,25.0%,2,0,0,2,0,0
+Bogdan Aurescu,Independent,https://www.factual.ro/persoane/bogdan-aurescu/,25.0%,2,0,0,2,0,0
+Aurelian Bădulescu,Independent,https://www.factual.ro/persoane/aurelian-badulescu/,25.0%,2,0,0,2,0,0
+Vergil Chițac,Independent,https://www.factual.ro/persoane/vergil-chitac/,25.0%,1,0,0,1,0,0
+Tánczos Barna,Independent,https://www.factual.ro/persoane/tanczos-barna/,25.0%,1,0,0,1,0,0
+Tiberiu-Claudiu Barstan,Independent,https://www.factual.ro/persoane/tiberiu-claudiu-barstan/,25.0%,1,0,0,1,0,0
+Theodora Șotcan,Independent,https://www.factual.ro/persoane/theodora-sotcan/,25.0%,1,0,0,1,0,0
+Roxana Natalia Pațurcă,Independent,https://www.factual.ro/persoane/roxana-natalia-paturca/,25.0%,1,0,0,1,0,0
+Remus Pricopie,Independent,https://www.factual.ro/persoane/remus-pricopie/,25.0%,1,0,0,1,0,0
+Odon Szabo,Independent,https://www.factual.ro/persoane/odon-szabo/,25.0%,1,0,0,1,0,0
+Ministerul Energiei,Independent,https://www.factual.ro/persoane/ministerul-energiei/,25.0%,1,0,0,1,0,0
+Luis Lazarus,Independent,https://www.factual.ro/persoane/luis-lazarus/,25.0%,1,0,0,1,0,0
+Liviu Iolu,REPER,https://www.factual.ro/persoane/liviu-iolu/,25.0%,1,0,0,1,0,0
+Gheorghe Șoldan,Independent,https://www.factual.ro/persoane/gheorghe-soldan/,25.0%,1,0,0,1,0,0
+Eduard Koler,Independent,https://www.factual.ro/persoane/eduard-koler/,25.0%,1,0,0,1,0,0
+Diana Anda Buzoianu,Independent,https://www.factual.ro/persoane/diana-anda-buzoianu/,25.0%,1,0,0,1,0,0
+Călin Popescu Tăriceanu,Independent,https://www.factual.ro/persoane/calin-popescu-tariceanu/,25.0%,1,0,0,1,0,0
+Csoma Botond,Independent,https://www.factual.ro/persoane/csoma-botond/,25.0%,1,0,0,1,0,0
+Ciprian Ciubuc,SOS,https://www.factual.ro/persoane/ciprian-ciubuc/,25.0%,1,0,0,1,0,0
+Beniamin Todosiu,Independent,https://www.factual.ro/persoane/beniamin-todosiu/,25.0%,1,0,0,1,0,0
+Adriean Videanu,Independent,https://www.factual.ro/persoane/adriean-videanu/,25.0%,1,0,0,1,0,0
+Gheorghe Piperea,Independent,https://www.factual.ro/persoane/gheorghe-piperea/,23.61%,18,0,10,4,3,1
+Ilan Laufer,AUR,https://www.factual.ro/persoane/ilan-laufer/,21.88%,8,0,4,3,0,1
+Guvernul României,Guvern,https://www.factual.ro/persoane/guvernul-romaniei/,21.88%,8,0,4,3,0,1
+Florin Iordache,Independent,https://www.factual.ro/persoane/florin-iordache/,21.88%,8,0,4,3,0,1
+Ştefănel-Dan Marin,Independent,https://www.factual.ro/persoane/stefanel-dan-marin/,20.83%,6,0,4,1,0,1
+Gabriel Mutu,Independent,https://www.factual.ro/persoane/gabriel-mutu/,20.83%,6,0,4,1,0,1
+Florin Grigorescu,Independent,https://www.factual.ro/persoane/florin-grigorescu/,20.83%,6,0,4,1,0,1
+Mihai Weber,Independent,https://www.factual.ro/persoane/mihai-weber/,17.59%,27,0,18,5,2,2
+Diana Iovanovici-Șoșoacă,Independent,https://www.factual.ro/persoane/diana-iovanovici-sosoaca/,17.59%,27,0,18,5,2,2
+Alexandru Rafila,Independent,https://www.factual.ro/persoane/alexandru-rafila/,17.59%,27,0,18,5,2,2
+Victor Ciorbea,Independent,https://www.factual.ro/persoane/victor-ciorbea/,16.67%,4,1,1,2,0,0
+Iulian Iancu,Independent,https://www.factual.ro/persoane/iulian-iancu/,16.67%,4,1,1,2,0,0
+Ana Birchall,PSD,https://www.factual.ro/persoane/ana-birchall/,16.67%,4,1,1,2,0,0
+Dan Tanasă,Independent,https://www.factual.ro/persoane/dan-tanasa/,16.67%,3,0,1,2,0,0
+Bogdan Bola,Independent,https://www.factual.ro/persoane/bogdan-bola/,16.67%,3,0,1,2,0,0
+AUR,AUR,https://www.factual.ro/persoane/aur/,16.67%,3,0,1,2,0,0
+Stelian Damov,Independent,https://www.factual.ro/persoane/stelian-damov/,12.5%,8,0,6,1,1,0
+Liviu Pop,Independent,https://www.factual.ro/persoane/liviu-pop/,12.5%,8,0,6,1,1,0
+Cătălin Berenghi,Independent,https://www.factual.ro/persoane/catalin-berenghi/,12.5%,8,0,6,1,1,0
+Radu Mihaiu,Independent,https://www.factual.ro/persoane/radu-mihaiu/,12.5%,4,0,2,2,0,0
+Marius Dorin Lulea,Independent,https://www.factual.ro/persoane/marius-dorin-lulea/,12.5%,4,0,2,2,0,0
+Alin Tișe,Independent,https://www.factual.ro/persoane/alin-tise/,12.5%,4,0,2,2,0,0
+Vasile Cîtea,Independent,https://www.factual.ro/persoane/vasile-citea/,12.5%,2,0,1,1,0,0
+Sorin Oprescu,Independent,https://www.factual.ro/persoane/sorin-oprescu/,12.5%,2,0,1,1,0,0
+Raluca Prună,Independent,https://www.factual.ro/persoane/raluca-pruna/,12.5%,2,0,1,1,0,0
+Radu Preda,Independent,https://www.factual.ro/persoane/radu-preda/,12.5%,2,0,1,1,0,0
+Petre Daea,Independent,https://www.factual.ro/persoane/petre-daea/,12.5%,2,0,1,1,0,0
+Pavel Popescu,Independent,https://www.factual.ro/persoane/pavel-popescu/,12.5%,2,0,1,1,0,0
+PSD,Independent,https://www.factual.ro/persoane/psd/,12.5%,2,0,1,1,0,0
+Mugur Cozmanciuc,Independent,https://www.factual.ro/persoane/mugur-cozmanciuc/,12.5%,2,0,1,1,0,0
+Lavinia Craioveanu,Independent,https://www.factual.ro/persoane/lavinia-craioveanu/,12.5%,2,0,1,1,0,0
+Laura Fulgeanu-Moagher,Independent,https://www.factual.ro/persoane/laura-fulgeanu-moagher/,12.5%,2,0,1,1,0,0
+Ionel Arsene,Independent,https://www.factual.ro/persoane/ionel-arsene/,12.5%,2,0,1,1,0,0
+Gabriela Zoană,Independent,https://www.factual.ro/persoane/gabriela-zoana/,12.5%,2,0,1,1,0,0
+Florin Ștefan-Vasile,Independent,https://www.factual.ro/persoane/florin-stefan-vasile/,12.5%,2,0,1,1,0,0
+Florian Bodog,Independent,https://www.factual.ro/persoane/florian-bodog/,12.5%,2,0,1,1,0,0
+Dragos Benea,Independent,https://www.factual.ro/persoane/dragos-benea/,12.5%,2,0,1,1,0,0
+Daniel Barbu,Independent,https://www.factual.ro/persoane/daniel-barbu/,12.5%,2,0,1,1,0,0
+Dacian Cioloș,REPER,https://www.factual.ro/persoane/dacian-ciolos/,12.5%,2,0,1,1,0,0
+Cătălin Cherecheș,PSD,https://www.factual.ro/persoane/catalin-chereches/,12.5%,2,0,1,1,0,0
+Costel Alexe,PNL,https://www.factual.ro/persoane/costel-alexe/,12.5%,2,0,1,1,0,0
+Antoneta Ioniță,Independent,https://www.factual.ro/persoane/antoneta-ionita/,12.5%,2,0,1,1,0,0
+Ana Ciceală,Independent,https://www.factual.ro/persoane/ana-ciceala/,12.5%,2,0,1,1,0,0
+Allen Coliban,Independent,https://www.factual.ro/persoane/allen-coliban-2/,12.5%,2,0,1,1,0,0
+Alin Nica,Independent,https://www.factual.ro/persoane/alin-nica/,12.5%,2,0,1,1,0,0
+Alexandra Bugner,Independent,https://www.factual.ro/persoane/alexandra-bugner/,12.5%,2,0,1,1,0,0
+Oana Bulai,Independent,https://www.factual.ro/persoane/oana-bulai/,8.33%,4,1,2,1,0,0
+Emil Boc,Independent,https://www.factual.ro/persoane/emil-boc/,8.33%,4,1,2,1,0,0
+Adina Alberts,Independent,https://www.factual.ro/persoane/adina-alberts/,8.33%,4,1,2,1,0,0
+Dumitru Coarnă,AUR,https://www.factual.ro/persoane/dumitru-coarna/,8.33%,3,0,2,1,0,0
+Lorand Turos,Independent,https://www.factual.ro/persoane/lorand-turos/,5.0%,5,0,4,1,0,0
+Dorel Covaci,Independent,https://www.factual.ro/persoane/dorel-covaci/,5.0%,5,0,4,1,0,0
+Claudiu-Richard Târziu,Independent,https://www.factual.ro/persoane/claudiu-richard-tarziu/,5.0%,5,0,4,1,0,0
+Ionuț Moșteanu,Independent,https://www.factual.ro/persoane/ionut-mosteanu/,4.17%,6,0,5,1,0,0
+Horia Teodorescu,Independent,https://www.factual.ro/persoane/horia-teodorescu/,4.17%,6,0,5,1,0,0
+Florin Barbu,Independent,https://www.factual.ro/persoane/florin-ionut-barbu/,4.17%,6,0,5,1,0,0
+Ramona Ioana Bruynseels,Independent,https://www.factual.ro/persoane/ramona-ioana-bruynseels/,0.0%,4,1,3,0,0,0
+Cristian Terheș,Independent,https://www.factual.ro/persoane/cristian-terhes/,0.0%,4,1,3,0,0,0
+Claudiu Manda,Independent,https://www.factual.ro/persoane/claudiu-manda/,0.0%,4,1,3,0,0,0
+Sebastian Suciu,Independent,https://www.factual.ro/persoane/sebastian-suciu/,0.0%,2,0,2,0,0,0
+Ilie Bolojan,Independent,https://www.factual.ro/persoane/ilie-bolojan/,0.0%,2,0,2,0,0,0
+Gabriel Oprea,Independent,https://www.factual.ro/persoane/gabriel-oprea/,0.0%,2,1,1,0,0,0
+Daniel Ghiță,Independent,https://www.factual.ro/persoane/daniel-ghita/,0.0%,2,0,2,0,0,0
+Ciprian Șerban,Independent,https://www.factual.ro/persoane/ciprian-serban/,0.0%,2,0,2,0,0,0
+Ciprian Titi Stoica,Independent,https://www.factual.ro/persoane/ciprian-titi-stoica/,0.0%,2,0,2,0,0,0
+Angela Negrotă,Independent,https://www.factual.ro/persoane/angela-negrota/,0.0%,2,0,2,0,0,0
+Adrian Năstase,Independent,https://www.factual.ro/persoane/adrian-nastase/,0.0%,2,1,1,0,0,0
+Șerban Nicolae,Independent,https://www.factual.ro/persoane/serban-nicolae-2/,0.0%,1,0,1,0,0,0
+Zakarias Zoltan,Independent,https://www.factual.ro/persoane/zakarias-zoltan/,0.0%,1,0,1,0,0,0
+Virginel Iordache,Independent,https://www.factual.ro/persoane/virginel-iordache/,0.0%,1,0,1,0,0,0
+Viorel-Ionel Blăjuț,Independent,https://www.factual.ro/persoane/viorel-ionel-blajut/,0.0%,1,0,1,0,0,0
+Viorel Cataramă,Independent,https://www.factual.ro/persoane/viorel-catarama/,0%,1,1,0,0,0,0
+Violeta Alexandru,USR,https://www.factual.ro/persoane/violeta-alexandru/,0%,1,1,0,0,0,0
+Veronica Grosu,Independent,https://www.factual.ro/persoane/veronica-grosu/,0.0%,1,0,1,0,0,0
+Vasile Blaga,Independent,https://www.factual.ro/persoane/vasile-blaga/,0.0%,1,0,1,0,0,0
+Tudor Benga,USR,https://www.factual.ro/persoane/tudor-benga/,0.0%,1,0,1,0,0,0
+Toma Petcu,Independent,https://www.factual.ro/persoane/toma-petcu/,0.0%,1,0,1,0,0,0
+Stelian Bujduveanu,Independent,https://www.factual.ro/persoane/stelian-bujduveanu/,0.0%,1,0,1,0,0,0
+Sorin Grindeanu,Independent,https://www.factual.ro/persoane/sorin-grindeanu/,0.0%,1,0,1,0,0,0
+Sorin Cristian Mateescu,Independent,https://www.factual.ro/persoane/sorin-cristian-mateescu/,0.0%,1,0,1,0,0,0
+Sorin Bota,Independent,https://www.factual.ro/persoane/sorin-bota/,0.0%,1,0,1,0,0,0
+Silviu-Florin Oancea,Independent,https://www.factual.ro/persoane/silviu-oancea/,0.0%,1,0,1,0,0,0
+Sebastian Ghiță,Independent,https://www.factual.ro/persoane/sebastian-ghita/,0.0%,1,0,1,0,0,0
+SPECIAL 8 martie: dezbatere între patru deputate și o doamnă ministru,Independent,https://www.factual.ro/persoane/special-8-martie-dezbatere-intre-patru-deputate-si-o-doamna-ministru/,0.0%,1,0,1,0,0,0
+Răzvan Sava,Independent,https://www.factual.ro/persoane/razvan-sava/,0.0%,1,0,1,0,0,0
+Răzvan Nicolescu,Independent,https://www.factual.ro/persoane/razvan-nicolescu/,0.0%,1,0,1,0,0,0
+Robert Cazanciuc,Independent,https://www.factual.ro/persoane/robert-cazanciuc/,0.0%,1,0,1,0,0,0
+Remus Cernea,Independent,https://www.factual.ro/persoane/remus-cernea/,0.0%,1,0,1,0,0,0
+Raluca Turcan,Independent,https://www.factual.ro/persoane/raluca-turcan/,0.0%,1,0,1,0,0,0
+Radu Carp,Independent,https://www.factual.ro/persoane/radu-carp/,0.0%,1,0,1,0,0,0
+Politician,Independent,https://www.factual.ro/persoane/politician/,0.0%,1,0,1,0,0,0
+Petrișor Peiu,Independent,https://www.factual.ro/persoane/petrisor-peiu/,0.0%,1,0,1,0,0,0
+Petrică Folică,Independent,https://www.factual.ro/persoane/petrica-folica/,0.0%,1,0,1,0,0,0
+Paul Stănescu,Independent,https://www.factual.ro/persoane/paul-stanescu/,0.0%,1,0,1,0,0,0
+PMB,Independent,https://www.factual.ro/persoane/3355/,0.0%,1,0,1,0,0,0
+Oana Florea,Independent,https://www.factual.ro/persoane/oana-florea/,0.0%,1,0,1,0,0,0
+Oana Bîzgan,Independent,https://www.factual.ro/persoane/oana-bizgan/,0.0%,1,0,1,0,0,0
+Nigel Farage,Independent,https://www.factual.ro/persoane/nigel-farage-despre-politicile-de-emigratie-uk/,0.0%,1,0,1,0,0,0
+Nicuşor Halici,PSD,https://www.factual.ro/persoane/nicusor-halici/,0.0%,1,0,1,0,0,0
+Niculae Havrileț,Independent,https://www.factual.ro/persoane/niculae-havrilet/,0.0%,1,0,1,0,0,0
+Nicolae Neagu,Independent,https://www.factual.ro/persoane/nicolae-neagu/,0.0%,1,0,1,0,0,0
+Nicolae Bănicoiu,Independent,https://www.factual.ro/persoane/nicolae-banicoiu/,0.0%,1,0,1,0,0,0
+Mugur Mihăescu,Independent,https://www.factual.ro/persoane/mugur-mihaescu/,0.0%,1,0,1,0,0,0
+Moţiune de cenzură,Independent,https://www.factual.ro/persoane/motiune-de-cenzura/,0.0%,1,0,1,0,0,0
+Mircea Geoană,Independent,https://www.factual.ro/persoane/mircea-geoana/,0.0%,1,0,1,0,0,0
+Ministerul Transporturilor,Independent,https://www.factual.ro/persoane/ministerul-transporturilor/,0.0%,1,0,1,0,0,0
+Ministerul Finanțelor,Guvern,https://www.factual.ro/persoane/ministerul-finantelor/,0.0%,1,0,1,0,0,0
+Mihai Gâdea,Independent,https://www.factual.ro/persoane/mihai-gadea/,0.0%,1,0,1,0,0,0
+Marian Vasile,Independent,https://www.factual.ro/persoane/marian-vasile/,0.0%,1,0,1,0,0,0
+Marcel Boloș,Independent,https://www.factual.ro/persoane/marcel-bolos/,0.0%,1,0,1,0,0,0
+Luminița Jivan,Independent,https://www.factual.ro/persoane/luminita-jivan/,0.0%,1,0,1,0,0,0
+Liviu Voinea,Independent,https://www.factual.ro/persoane/liviu-voinea/,0.0%,1,0,1,0,0,0
+Liviu Dragnea,Independent,https://www.factual.ro/persoane/liviu-dragnea-3/,0.0%,1,0,1,0,0,0
+Liliana Mincă,Independent,https://www.factual.ro/persoane/liliana-minca/,0.0%,1,0,1,0,0,0
+Lidia Vadim Tudor,Independent,https://www.factual.ro/persoane/lidia-vadim-tudor/,0.0%,1,0,1,0,0,0
+Laura Codruța Kovesi,Independent,https://www.factual.ro/persoane/laura-codruta-kovesi/,0.0%,1,0,1,0,0,0
+Ionuț Stroe,Independent,https://www.factual.ro/persoane/ionut-stroe/,0.0%,1,0,1,0,0,0
+Ionuț Florin Pucheanu,Independent,https://www.factual.ro/persoane/ionut-florin-pucheanu/,0.0%,1,0,1,0,0,0
+Ioana Constantin,Independent,https://www.factual.ro/persoane/ioana-constantin/,0%,1,1,0,0,0,0
+Ioan Sîrbu,Independent,https://www.factual.ro/persoane/ioan-sirbu/,0.0%,1,0,1,0,0,0
+Ioan Rus,Independent,https://www.factual.ro/persoane/ioan-rus/,0.0%,1,0,1,0,0,0
+Ioan Mircea Pașcu,Independent,https://www.factual.ro/persoane/ioan-mircea-pascu/,0.0%,1,0,1,0,0,0
+Ilie Sârbu,Independent,https://www.factual.ro/persoane/ilie-sarbu/,0.0%,1,0,1,0,0,0
+Georgiana Teodorescu,Independent,https://www.factual.ro/persoane/georgiana-teodorescu/,0.0%,1,0,1,0,0,0
+Eusebiu Pistru,Independent,https://www.factual.ro/persoane/eusebiu-pistru/,0.0%,1,0,1,0,0,0
+Eugen Teodorovici,Independent,https://www.factual.ro/persoane/eugen-teodorovici/,0.0%,1,0,1,0,0,0
+Eugen Pîrvulescu,Independent,https://www.factual.ro/persoane/eugen-pirvulescu/,0.0%,1,0,1,0,0,0
+Emil Radu Moldovan,Independent,https://www.factual.ro/persoane/emil-radu-moldovan/,0.0%,1,0,1,0,0,0
+Daniel David,Independent,https://www.factual.ro/persoane/daniel-david/,0.0%,1,0,1,0,0,0
+Dan Marinescu,Independent,https://www.factual.ro/persoane/dan-marinescu/,0.0%,1,0,1,0,0,0
+Dan Cărbunaru,Independent,https://www.factual.ro/persoane/dan-carbunaru/,0.0%,1,0,1,0,0,0
+Dan Cristian Popescu,Independent,https://www.factual.ro/persoane/dan-cristian-popescu/,0.0%,1,0,1,0,0,0
+Cătălin Rădulescu,PER,https://www.factual.ro/persoane/catalin-radulescu/,0.0%,1,0,1,0,0,0
+Cătălin Drulă,Independent,https://www.factual.ro/persoane/catalin-drula/,0.0%,1,0,1,0,0,0
+Călin Georgescu,Independent,https://www.factual.ro/persoane/calin-georgescu/,0.0%,1,0,1,0,0,0
+Cristina Pocora,Independent,https://www.factual.ro/persoane/cristina-pocora/,0.0%,1,0,1,0,0,0
+Cristian-Tudor Băcanu,Independent,https://www.factual.ro/persoane/cristian-tudor-bacanu/,0.0%,1,0,1,0,0,0
+Cristian Preda,Independent,https://www.factual.ro/persoane/cristian-preda/,0.0%,1,0,1,0,0,0
+Cristian Petrescu,Independent,https://www.factual.ro/persoane/cristian-petrescu/,0.0%,1,0,1,0,0,0
+Cristian Diaconescu,Independent,https://www.factual.ro/persoane/cristian-diaconescu-2/,0.0%,1,0,1,0,0,0
+Corina Crețu,Independent,https://www.factual.ro/persoane/corina-cretu/,0.0%,1,0,1,0,0,0
+Ciprian Paraschiv,Independent,https://www.factual.ro/persoane/ciprian-paraschiv/,0.0%,1,0,1,0,0,0
+Ciprian Dobre,Independent,https://www.factual.ro/persoane/ciprian-dobre/,0.0%,1,0,1,0,0,0
+Bogdan Stan,Independent,https://www.factual.ro/persoane/bogdan-stan/,0.0%,1,0,1,0,0,0
+Bogdan Glăvan,Independent,https://www.factual.ro/persoane/bogdan-glavan/,0.0%,1,0,1,0,0,0
+Bogdan Cojocaru,Independent,https://www.factual.ro/persoane/bogdan-cojocaru/,0.0%,1,0,1,0,0,0
+Aurora Tasica Simu,Independent,https://www.factual.ro/persoane/aurora-tasica-simu/,0.0%,1,0,1,0,0,0
+Anghel Stanciu,Independent,https://www.factual.ro/persoane/anghel-stanciu/,0.0%,1,0,1,0,0,0
+Angel Tîlvăr,Independent,https://www.factual.ro/persoane/angel-tilvar/,0.0%,1,0,1,0,0,0
+Anca Dragu,USR,https://www.factual.ro/persoane/anca-dragu/,0.0%,1,0,1,0,0,0
+Anca Alexandrescu,Independent,https://www.factual.ro/persoane/anca-alexandrescu/,0.0%,1,0,1,0,0,0
+Alin Virgil Chirilă,Independent,https://www.factual.ro/persoane/alin-virgil-chirila/,0.0%,1,0,1,0,0,0
+Alin Gabriel Apostol,Independent,https://www.factual.ro/persoane/alin-gabriel-apostol/,0.0%,1,0,1,0,0,0
+Alexandru Nazare,Independent,https://www.factual.ro/persoane/alexandru-nazare-2/,0.0%,1,0,1,0,0,0
+Alexandru Muraru,Independent,https://www.factual.ro/persoane/alexandru-muraru/,0.0%,1,0,1,0,0,0
+Alexandru Athanasiu,PSD,https://www.factual.ro/persoane/alexandru-athanasiu/,0.0%,1,0,1,0,0,0
+Adrian Țuțuianu,Independent,https://www.factual.ro/persoane/adrian-tutuianu/,0.0%,1,0,1,0,0,0
+Adrian Curaj,Independent,https://www.factual.ro/persoane/adrian-curaj/,0.0%,1,0,1,0,0,0
+Adela Mîrza,Independent,https://www.factual.ro/persoane/adela-mirza/,0.0%,1,0,1,0,0,0
+@for.vladimir.putin,Independent,https://www.factual.ro/persoane/for-vladimir-putin/,0.0%,1,0,1,0,0,0
