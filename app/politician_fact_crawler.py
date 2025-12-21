@@ -49,7 +49,11 @@ class PoliticianFactsCrawler:
         chrome_options.add_argument('--disable-gpu')
         chrome_options.add_argument('--window-size=1920,1080')
         chrome_options.add_argument('--disable-software-rasterizer')
-        chrome_options.add_argument('--remote-debugging-port=9222')
+
+        # Add stability options
+        chrome_options.add_argument('--disable-blink-features=AutomationControlled')
+        chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        chrome_options.page_load_strategy = 'normal'
 
         # Random user agent
         user_agents = [
@@ -61,6 +65,7 @@ class PoliticianFactsCrawler:
 
         # Let Selenium Manager handle the browser and driver detection
         driver = webdriver.Chrome(options=chrome_options)
+        driver.set_page_load_timeout(30)
         return driver
 
     def parse_facts(self):
@@ -153,4 +158,7 @@ class PoliticianFactsCrawler:
         return None
       finally:
         if driver:
-          driver.quit()
+          try:
+            driver.quit()
+          except Exception as quit_error:
+            logger.debug(f'Error while closing driver: {quit_error}')
