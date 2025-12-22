@@ -2,6 +2,7 @@
 
 # Setup script for daily politician stats cron job
 # This script configures a cron job that survives reboots
+# Supports both Linux and macOS
 
 set -e
 
@@ -10,7 +11,16 @@ PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 UPDATE_SCRIPT="$SCRIPT_DIR/update_dashboard_data.sh"
 CRON_USER="$(whoami)"
 
+# Detect operating system
+OS_TYPE="$(uname -s)"
+case "$OS_TYPE" in
+    Linux*)     OS="Linux";;
+    Darwin*)    OS="macOS";;
+    *)          OS="Unknown";;
+esac
+
 echo "Setting up daily politician stats update cron job..."
+echo "Detected OS: $OS"
 
 # Verify the update script exists and is executable
 if [ ! -f "$UPDATE_SCRIPT" ]; then
@@ -56,13 +66,17 @@ fi
 # Change to project directory
 cd "$PROJECT_DIR"
 
-# Activate virtual environment
-VENV_PATH="$PROJECT_DIR/.venv"
+# Activate virtual environment (try both .venv and venv)
+VENV_PATH="$PROJECT_DIR/venv"
+if [ ! -f "\$VENV_PATH/bin/activate" ]; then
+    VENV_PATH="$PROJECT_DIR/.venv"
+fi
+
 if [ -f "\$VENV_PATH/bin/activate" ]; then
     source "\$VENV_PATH/bin/activate"
     echo "Activated virtual environment at \$VENV_PATH"
 else
-    echo "ERROR: Virtual environment not found at \$VENV_PATH"
+    echo "ERROR: Virtual environment not found at $PROJECT_DIR/venv or $PROJECT_DIR/.venv"
     exit 1
 fi
 
@@ -97,13 +111,13 @@ echo "Adding cron job to run daily at 20:00 ..."
 echo "Current cron jobs for user $CRON_USER:"
 crontab -l | grep -E "(update_dashboard|politician-stats-cron-wrapper)" || echo "No matching cron jobs found"
 
-# Create systemd user service for additional reliability (optional)
-SYSTEMD_USER_DIR="$HOME/.config/systemd/user"
-if command -v systemctl >/dev/null 2>&1; then
+# Create OS-specific scheduling service
+if [ "$OS" = "Linux" ] && command -v systemctl >/dev/null 2>&1; then
+    # Linux with systemd - create systemd user service
     echo "Creating systemd user service for additional reliability..."
-    
+    SYSTEMD_USER_DIR="$HOME/.config/systemd/user"
     mkdir -p "$SYSTEMD_USER_DIR"
-    
+
     # Create service file
     cat > "$SYSTEMD_USER_DIR/politician-stats-update.service" << EOF
 [Unit]
@@ -141,29 +155,87 @@ EOF
     systemctl --user daemon-reload
     systemctl --user enable politician-stats-update.timer
     systemctl --user start politician-stats-update.timer
-    
-    echo "Systemd user timer created and enabled"
+
+    echo "✅ Systemd user timer created and enabled"
     echo "Timer status:"
     systemctl --user status politician-stats-update.timer --no-pager
+elif [ "$OS" = "macOS" ]; then
+    # macOS - create LaunchAgent
+    echo "Creating macOS LaunchAgent..."
+    LAUNCH_AGENTS_DIR="$HOME/Library/LaunchAgents"
+    mkdir -p "$LAUNCH_AGENTS_DIR"
+    PLIST_FILE="$LAUNCH_AGENTS_DIR/com.factualchecker.politicianstats.plist"
+
+    cat > "$PLIST_FILE" << EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.factualchecker.politicianstats</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>$CRON_WRAPPER</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>20</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>$PROJECT_DIR/logs/launchagent.log</string>
+    <key>StandardErrorPath</key>
+    <string>$PROJECT_DIR/logs/launchagent-error.log</string>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>WorkingDirectory</key>
+    <string>$PROJECT_DIR</string>
+</dict>
+</plist>
+EOF
+
+    # Load the LaunchAgent
+    launchctl unload "$PLIST_FILE" 2>/dev/null || true
+    launchctl load "$PLIST_FILE"
+
+    echo "✅ macOS LaunchAgent created and loaded"
+    echo "LaunchAgent file: $PLIST_FILE"
 else
-    echo "Systemd not available, relying on cron only"
+    echo "ℹ️  Advanced scheduling not available, relying on cron only"
 fi
 
 # Create startup script to ensure cron is running
 STARTUP_SCRIPT="$HOME/.local/bin/ensure-politician-stats-cron.sh"
-cat > "$STARTUP_SCRIPT" << EOF
+cat > "$STARTUP_SCRIPT" << 'STARTUP_EOF'
 #!/bin/bash
 
 # Ensure cron service is running and our job is scheduled
 # This script can be added to startup applications
 
-# Start cron service if not running
-if ! pgrep -x "cron" > /dev/null && ! pgrep -x "crond" > /dev/null; then
-    echo "Starting cron service..."
-    sudo service cron start 2>/dev/null || sudo service crond start 2>/dev/null || echo "Could not start cron service"
+# Detect OS
+OS_TYPE="$(uname -s)"
+case "$OS_TYPE" in
+    Linux*)     OS="Linux";;
+    Darwin*)    OS="macOS";;
+    *)          OS="Unknown";;
+esac
+
+if [ "$OS" = "Linux" ]; then
+    # Start cron service if not running on Linux
+    if ! pgrep -x "cron" > /dev/null && ! pgrep -x "crond" > /dev/null; then
+        echo "Starting cron service..."
+        sudo service cron start 2>/dev/null || sudo service crond start 2>/dev/null || echo "Could not start cron service"
+    fi
+elif [ "$OS" = "macOS" ]; then
+    # On macOS, cron is always running (managed by launchd)
+    echo "macOS detected - cron managed by launchd"
 fi
 
 # Verify our cron job exists
+STARTUP_EOF
+cat >> "$STARTUP_SCRIPT" << EOF
 if ! crontab -l 2>/dev/null | grep -q "politician-stats-cron-wrapper.sh"; then
     echo "Re-adding politician stats cron job..."
     (crontab -l 2>/dev/null; echo "$CRON_ENTRY") | crontab -
@@ -181,8 +253,10 @@ echo "✅ Wrapper script created: $CRON_WRAPPER"
 echo "✅ Startup script created: $STARTUP_SCRIPT"
 echo "✅ Update script: $UPDATE_SCRIPT"
 
-if command -v systemctl >/dev/null 2>&1; then
+if [ "$OS" = "Linux" ] && command -v systemctl >/dev/null 2>&1; then
     echo "✅ Systemd timer enabled as backup"
+elif [ "$OS" = "macOS" ]; then
+    echo "✅ macOS LaunchAgent created and loaded"
 fi
 
 echo ""
@@ -191,16 +265,26 @@ echo "Test update script: $UPDATE_SCRIPT"
 echo "View cron jobs: crontab -l"
 echo "Check logs: tail -f $PROJECT_DIR/logs/update_\$(date +%Y%m%d).log"
 
-if command -v systemctl >/dev/null 2>&1; then
+if [ "$OS" = "Linux" ] && command -v systemctl >/dev/null 2>&1; then
     echo "Check systemd timer: systemctl --user status politician-stats-update.timer"
+elif [ "$OS" = "macOS" ]; then
+    echo "Check LaunchAgent: launchctl list | grep factualchecker"
+    echo "View LaunchAgent logs: tail -f $PROJECT_DIR/logs/launchagent.log"
 fi
 
 echo ""
-echo "=== To ensure persistence across reboots ==="
-echo "Add this to your startup applications or .bashrc:"
-echo "$STARTUP_SCRIPT"
+if [ "$OS" = "macOS" ]; then
+    echo "=== macOS Setup Notes ==="
+    echo "The LaunchAgent will run automatically at 20:00 daily"
+    echo "Cron is also configured as a backup"
+    echo ""
+else
+    echo "=== To ensure persistence across reboots ==="
+    echo "Add this to your startup applications or .bashrc:"
+    echo "$STARTUP_SCRIPT"
+    echo ""
+fi
 
-echo ""
 echo "The script will run daily at 20:00 and:"
 echo "- Generate new politician stats"
 echo "- Commit changes to git"
