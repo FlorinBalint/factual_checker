@@ -98,6 +98,7 @@ __party_override = {
   'Tudor Ciuhodaru': 'AUR',
   'Anton Anton': 'ALDE',
   'Paul Gheorghe': 'PSD',
+  'Marius Dorin Lulea': 'AUR',
 }
 
 class BooleanAction(argparse.Action):

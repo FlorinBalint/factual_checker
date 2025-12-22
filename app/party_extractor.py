@@ -5,7 +5,7 @@ from pyquery import PyQuery
 logger = logging.getLogger(__name__)
 
 class PartyExtractor:
-  __pattern = re.compile(r'(Afiliere Politică: )'
+  __pattern = re.compile(
     r'([Ff]ost )?(membru|[p]artidul|[Dd]eputat|[Ss]enator|[Ee]uroparlamentar|(Vice)?[pP]reședinte)?'
     r'(?P<party>(?:[^,\(]*)+)'
   )
@@ -32,7 +32,7 @@ class PartyExtractor:
     if not page_doc:
       return "Independent"
     
-    description = page_doc('.afilierepolitica')
+    description = page_doc('.wp-block-ultimate-post-column p.page-title')
     if not description:
       logger.warning('No description found on page')
       return "Independent"

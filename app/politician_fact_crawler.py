@@ -19,7 +19,7 @@ class PoliticianFactsCrawler:
     __false_statement_values = {'Fals', 'În afara mandatului'}
     __partially_true_statement_values = {'Parțial Adevărat', 'Numai cu sprijin instituțional'}
     __truncated_statement_values = {'Trunchiat', 'Parțial Fals'}
-    __impossible_to_check_values = {'Imposibil de verificat'}
+    __impossible_to_check_values = {'Imposibil de verificat', 'In curs de verificare', 'Decideți voi'}
 
     def __init__(self, name, link=None, party=None):
         self.name = name
