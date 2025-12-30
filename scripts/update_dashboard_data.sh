@@ -55,10 +55,13 @@ if [ -f "$CSV_FILE" ]; then
 fi
 
 # Generate new stats with error handling
-if python3 main.py --output "../dashboard/politician_stats.csv" --generate_party_stats false --workers 3; then
+# Enable debug mode and capture all output (stdout + stderr) to log
+log "Running crawler with debug mode enabled..."
+if python3 main.py --output "../dashboard/politician_stats.csv" --generate_party_stats false --workers 3 --debug true 2>&1 | tee -a "$LOG_FILE"; then
     log "Successfully generated new politician stats"
 else
-    log "ERROR: Failed to generate politician stats"
+    exit_code=${PIPESTATUS[0]}
+    log "ERROR: Failed to generate politician stats (exit code: $exit_code)"
     # Restore backup if generation failed and backup exists
     BACKUP_DIR="$DASHBOARD_DIR/backups"
     if [ -d "$BACKUP_DIR" ]; then
@@ -118,6 +121,13 @@ find "$DASHBOARD_DIR/backups" -name "politician_stats.csv.backup.*" -type f -mti
 
 # Clean up old logs (keep only last 30 days)
 find "$PROJECT_DIR/logs" -name "update_*.log" -type f -mtime +30 -delete 2>/dev/null || true
+find "$PROJECT_DIR/logs" -name "crawler_*.log" -type f -mtime +30 -delete 2>/dev/null || true
 
 log "=== Politician stats update completed successfully ==="
 log "Dashboard available at: https://$(git config --get remote.origin.url | sed 's/.*github.com[:/]\([^/]*\)\/\([^/]*\)\.git/\1.github.io\/\2/')/dashboard/political_dashboard.html"
+
+# List the most recent crawler debug log
+latest_crawler_log=$(ls -t "$PROJECT_DIR/logs"/crawler_*.log 2>/dev/null | head -n1)
+if [ -n "$latest_crawler_log" ]; then
+    log "Detailed crawler log: $latest_crawler_log"
+fi

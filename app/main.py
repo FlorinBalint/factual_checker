@@ -180,12 +180,51 @@ def crawl_stats(args):
 
 
 def main(args):
-  # This sets the root logger to write to stdout (your console).
-  # Your script/app needs to call this somewhere at least once.
-  if args.debug:
-    logging.basicConfig(level=logging.DEBUG)
-  else:
-    logging.basicConfig(level=logging.INFO)
+  # This sets the root logger to write to stdout (your console) and to a file.
+  # Create logs directory if it doesn't exist
+  import os
+  from datetime import datetime
+
+  log_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'logs')
+  os.makedirs(log_dir, exist_ok=True)
+
+  # Create log filename with timestamp
+  log_filename = os.path.join(log_dir, f'crawler_{datetime.now().strftime("%Y%m%d_%H%M%S")}.log')
+
+  # Configure logging to both file and console
+  log_level = logging.DEBUG if args.debug else logging.INFO
+
+  # Remove any existing handlers
+  for handler in logging.root.handlers[:]:
+    logging.root.removeHandler(handler)
+
+  # Create formatters
+  detailed_formatter = logging.Formatter(
+    '[%(asctime)s] [%(levelname)s] [%(name)s:%(lineno)d] %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+  )
+  simple_formatter = logging.Formatter(
+    '[%(asctime)s] %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+  )
+
+  # File handler with detailed formatting
+  file_handler = logging.FileHandler(log_filename, mode='w')
+  file_handler.setLevel(logging.DEBUG)  # Always log DEBUG to file
+  file_handler.setFormatter(detailed_formatter)
+
+  # Console handler with simpler formatting
+  console_handler = logging.StreamHandler()
+  console_handler.setLevel(log_level)
+  console_handler.setFormatter(simple_formatter)
+
+  # Configure root logger
+  logging.root.setLevel(logging.DEBUG)
+  logging.root.addHandler(file_handler)
+  logging.root.addHandler(console_handler)
+
+  logging.info(f'Logging to file: {log_filename}')
+  logging.info(f'Log level: {"DEBUG" if args.debug else "INFO"}')
 
   output_file = args.output if args.output else 'politician_stats.csv'
   if args.stats_file:
