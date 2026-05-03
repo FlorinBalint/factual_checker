@@ -1,4 +1,5 @@
 import logging
+import re
 import time
 import random
 from pyquery import PyQuery as pq
@@ -19,7 +20,7 @@ class PoliticianFactsCrawler:
     __false_statement_values = {'Fals', 'În afara mandatului'}
     __partially_true_statement_values = {'Parțial Adevărat', 'Numai cu sprijin instituțional'}
     __truncated_statement_values = {'Trunchiat', 'Parțial Fals'}
-    __impossible_to_check_values = {'Imposibil de verificat', 'In curs de verificare', 'Decideți voi'}
+    __impossible_to_check_values = {'Imposibil de verificat', 'În curs de verificare', 'Decideți voi'}
 
     def __init__(self, name, link=None, party=None):
         self.name = name
@@ -126,7 +127,7 @@ class PoliticianFactsCrawler:
         impossible_to_check_st = 0
 
         for statement in statements:
-          statement_text = statement.attr('title').strip()
+          statement_text = re.sub(r'^\([^)]+\)\s*', '', statement.attr('title').strip())
           if statement_text in PoliticianFactsCrawler.__truth_statement_values:
             truth_st += 1
           elif statement_text in PoliticianFactsCrawler.__false_statement_values:
@@ -138,7 +139,7 @@ class PoliticianFactsCrawler:
           elif statement_text in PoliticianFactsCrawler.__impossible_to_check_values:
             impossible_to_check_st += 1
           else:
-            logger.warning(f'Unknown statement value {statement.text()} for politician {self.name}')
+            logger.warning(f'Unknown statement value "{statement_text}" for politician {self.name}')
 
         party = PartyExtractor(self.party).extract_party(doc)
         res = PoliticianStats(
