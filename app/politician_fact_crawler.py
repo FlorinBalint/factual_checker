@@ -7,7 +7,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.common.exceptions import TimeoutException, NoSuchElementException, InvalidSessionIdException
 from selenium.webdriver.chrome.options import Options
 from politician_stats import PoliticianStats
 from party_extractor import PartyExtractor
@@ -69,7 +69,18 @@ class PoliticianFactsCrawler:
         driver.set_page_load_timeout(30)
         return driver
 
-    def parse_facts(self):
+    def parse_facts(self, max_retries=3):
+      for attempt in range(1, max_retries + 2):
+        result = self._parse_facts()
+        if result is not None:
+          return result
+        if attempt <= max_retries:
+          wait_time = attempt * 5
+          logger.warning(f'Retrying {self.name} (attempt {attempt}/{max_retries}, waiting {wait_time}s)')
+          time.sleep(wait_time)
+      return None
+
+    def _parse_facts(self):
       logger.debug('Querying URL: ' + self.link)
 
       driver = None
@@ -79,7 +90,14 @@ class PoliticianFactsCrawler:
 
         # Wait for initial content to load
         wait = WebDriverWait(driver, 10)
-        wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'img.barometru-label')))
+        try:
+            wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'img.barometru-label')))
+        except TimeoutException:
+            logger.warning(f'No statements found for politician {self.name} at {self.link}')
+            party = PartyExtractor(self.party).extract_party(pq(driver.page_source))
+            return PoliticianStats(name=self.name, url=self.link, affiliation=party,
+                                   truncated_count=0, true_count=0, partially_true_count=0,
+                                   impossible_to_check_count=0, false_count=0)
 
         # Click "Load More" button until all statements are loaded
         max_clicks = 100  # Safety limit to prevent infinite loops
@@ -154,6 +172,9 @@ class PoliticianFactsCrawler:
         logger.debug('Found stats for politician %s with %d: %s' % (self.name, len(statements), str(res)))
         return res
 
+      except InvalidSessionIdException as e:
+        logger.warning(f'Browser session crashed for {self.name}, will retry: {e.msg}')
+        return None
       except Exception as e:
         logger.error(f'Failed to fetch {self.link}: {e}')
         return None
