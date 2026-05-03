@@ -81,7 +81,7 @@ class PoliticianFactsCrawler:
       return None
 
     def _parse_facts(self):
-      logger.debug('Querying URL: ' + self.link)
+      logger.debug(f'Starting crawl for {self.name} at {self.link}')
 
       driver = None
       try:
@@ -169,7 +169,7 @@ class PoliticianFactsCrawler:
            partially_true_count=partially_true_st // 2,
            impossible_to_check_count=impossible_to_check_st // 2,
            false_count=false_st // 2)
-        logger.debug('Found stats for politician %s with %d: %s' % (self.name, len(statements), str(res)))
+        logger.debug(f'Finished crawl for {self.name}: {len(statements) // 2} statements, credibility {res.credibility}')
         return res
 
       except InvalidSessionIdException as e:
