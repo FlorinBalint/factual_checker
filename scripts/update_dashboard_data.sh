@@ -80,6 +80,38 @@ if [ ! -f "$CSV_FILE" ] || [ ! -s "$CSV_FILE" ]; then
     exit 1
 fi
 
+# --- Safety check: detect politician count drop ---
+NEW_COUNT=$(tail -n +2 "$CSV_FILE" | grep -c '[^[:space:]]' || true)
+log "New politician count: $NEW_COUNT"
+
+# Get the old count from the backup
+BACKUP_DIR="$DASHBOARD_DIR/backups"
+OLD_COUNT=0
+if [ -d "$BACKUP_DIR" ]; then
+    latest_backup=$(ls -t "$BACKUP_DIR"/politician_stats.csv.backup.* 2>/dev/null | head -n1)
+    if [ -n "$latest_backup" ] && [ -f "$latest_backup" ]; then
+        OLD_COUNT=$(tail -n +2 "$latest_backup" | grep -c '[^[:space:]]' || true)
+        log "Previous politician count: $OLD_COUNT"
+    fi
+fi
+
+# Allow up to 10% drop (some politicians/posts may legitimately be removed)
+if [ "$OLD_COUNT" -gt 0 ]; then
+    MAX_ALLOWED_DROP=$(( OLD_COUNT * 10 / 100 ))
+    DROP=$(( OLD_COUNT - NEW_COUNT ))
+    if [ "$DROP" -gt "$MAX_ALLOWED_DROP" ]; then
+        log "ERROR: Politician count DROPPED by $DROP (from $OLD_COUNT to $NEW_COUNT), exceeds 10% threshold ($MAX_ALLOWED_DROP). Aborting to prevent data loss."
+        log "Restoring backup..."
+        if [ -n "$latest_backup" ] && [ -f "$latest_backup" ]; then
+            cp "$latest_backup" "$CSV_FILE"
+            log "Restored backup: $(basename "$latest_backup")"
+        fi
+        exit 1
+    elif [ "$DROP" -gt 0 ]; then
+        log "WARNING: Politician count dropped by $DROP (from $OLD_COUNT to $NEW_COUNT), within 10% threshold. Proceeding."
+    fi
+fi
+
 # Check if there are actual changes
 cd "$PROJECT_DIR"
 if git diff --quiet "$CSV_FILE"; then
@@ -95,6 +127,12 @@ git diff --stat "$CSV_FILE"
 # Add and commit changes
 log "Committing changes to git..."
 git add "$CSV_FILE"
+
+# Also add party_politician_stats.csv if it changed
+PARTY_CSV_FILE="$PROJECT_DIR/party_politician_stats.csv"
+if [ -f "$PARTY_CSV_FILE" ] && ! git diff --quiet "$PARTY_CSV_FILE" 2>/dev/null; then
+    git add "$PARTY_CSV_FILE"
+fi
 
 # Create commit message with stats
 COMMIT_MSG="Auto-update politician stats data - $(date '+%Y-%m-%d %H:%M')"
